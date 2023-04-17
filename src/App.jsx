@@ -10,7 +10,9 @@ import SendOTP from "./pages/auth/SendOTP";
 import ResetLostPassword from "./pages/auth/ResetLostPassword";
 import VerifyOTP from "./pages/auth/VerifyOTP";
 import ChangePassword from "./pages/user/landing/ChangePassword";
+import ViewMovieRating from "./pages/user/feedback/ViewMovieRating";
 import UserFeedback from "./pages/user/feedback/UserFeedback";
+import FeedbackSubmission from "./pages/user/feedback/FeedbackSubmission";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -25,7 +27,9 @@ function App() {
         <Route path="/reset-password" element={<ResetLostPassword />} />
         <Route path="/verify-otp" element={<VerifyOTP />} />
         <Route path="/change-password" element={<ChangePassword />} />
+        <Route path="/rating" element={<ViewMovieRating />} />
         <Route path="/feedback" element={<UserFeedback />} />
+        <Route path="/feedback-submission" element={<FeedbackSubmission />} />
       </Routes>
     </BrowserRouter>
   );

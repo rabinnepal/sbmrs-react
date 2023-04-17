@@ -1,7 +1,7 @@
-import { Box, Button, Rating, TextField, Typography } from "@mui/material";
+import { Box, Button, Rating, Typography } from "@mui/material";
 import React from "react";
 
-const UserFeedback = () => {
+const ViewMovieRating = () => {
   return (
     <Box>
       <Typography
@@ -24,10 +24,7 @@ const UserFeedback = () => {
         >
           Aquaman 2
         </Typography>
-        <Typography
-          variant="body1"
-          sx={{ fontWeight: 600, fontSize: 18, mb: 2 }}
-        >
+        <Typography variant="body1" sx={{ fontWeight: 600, fontSize: 18 }}>
           Aquaman forges an uneasy alliance with an unlikely ally to save
           Atlantis and the rest of the planet.
         </Typography>
@@ -37,20 +34,16 @@ const UserFeedback = () => {
           height={400}
           width={200}
         />
-        <Box sx={{ my: 4, display: "flex", gap: 3 }}>
-          <TextField
-            multiline
-            rows={4}
-            type="text"
-            fullWidth
-            placeholder="Write your comment here"
-            sx={{ width: 500 }}
-          />
+        <Box sx={{ my: 5, display: "flex", gap: 3 }}>
+          <Typography sx={{ fontWeight: 600, fontSize: 18 }}>
+            Overall Rating
+          </Typography>
+          <Rating name="rating" value={3} readOnly sx={{ border: "ridge" }} />
         </Box>
-        <Button variant="contained">Submit</Button>
+        <Button variant="contained">Add your comment</Button>
       </Box>
     </Box>
   );
 };
 
-export default UserFeedback;
+export default ViewMovieRating;

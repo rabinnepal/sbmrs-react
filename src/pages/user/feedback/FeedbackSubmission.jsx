@@ -1,7 +1,14 @@
-import { Box, Button, Rating, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Rating,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React from "react";
 
-const UserFeedback = () => {
+const FeedbackSubmission = () => {
   return (
     <Box>
       <Typography
@@ -37,20 +44,21 @@ const UserFeedback = () => {
           height={400}
           width={200}
         />
-        <Box sx={{ my: 4, display: "flex", gap: 3 }}>
-          <TextField
-            multiline
-            rows={4}
-            type="text"
-            fullWidth
-            placeholder="Write your comment here"
-            sx={{ width: 500 }}
-          />
+        <Box sx={{ my: 4, display: "flex", flexDirection: "column", gap: 3 }}>
+          <Typography sx={{ fontSize: 20, fontWeight: 600 }}>
+            Submitted!
+          </Typography>
+          <Typography sx={{ fontSize: 20, fontWeight: 600 }}>
+            Thank you for your comment
+          </Typography>
         </Box>
-        <Button variant="contained">Submit</Button>
+        <Stack direction="row" spacing={2}>
+          <Button variant="contained">Edit your comment</Button>
+          <Button variant="contained">Close</Button>
+        </Stack>
       </Box>
     </Box>
   );
 };
 
-export default UserFeedback;
+export default FeedbackSubmission;
