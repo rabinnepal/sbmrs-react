@@ -33,7 +33,7 @@ const FeedbackSubmission = () => {
         </Typography>
         <Typography
           variant="body1"
-          sx={{ fontWeight: 600, fontSize: 18, mb: 2 }}
+          sx={{ fontWeight: 600, fontSize: 18, mb: 2, p: 1 }}
         >
           Aquaman forges an uneasy alliance with an unlikely ally to save
           Atlantis and the rest of the planet.
