@@ -15,53 +15,39 @@ import {
   Grid,
   Container,
 } from "@mui/material";
-import { APIClass } from "../../../APICaller/APICaller";
+// import UpdateCategory from "./UpdateCategory";
 
 const drawerWidth = 240;
-export default function Movies() {
-  const [movies, setMovies] = useState([]);
+export default function Category() {
+  const [categories, setCategories] = useState([]);
   const [deleted, setDeleted] = useState([]);
 
   const api = new APIClass();
-  const token = `Bearer ${localStorage.getItem("token")}`;
 
-  // // display  all banners
-  const getMovies = useCallback(async (e) => {
-    const configToken = {
-      headers: {
-        Authorization: token,
-      },
-    };
-    const res = await axios.get(
-      `${api.baseURL}admin/view-movies/`,
-
-      configToken
-    );
-    console.log(res.data);
-    setMovies(res.data.movies);
+  // // display  all categories
+  const getCategories = useCallback(async (e) => {
+    await axios.get(`${api.baseURL}category/get/`).then((res) => {
+      console.log(res.data);
+      setCategories(res.data.data);
+    });
   }, []);
 
   useEffect(() => {
-    getMovies();
-  }, [getMovies]);
+    getCategories();
+  }, [getCategories]);
 
-  // delete artist
-
+  // delete categories
   const handleDelete = async (id) => {
-    const configToken = {
+    let config = {
       headers: {
-        Authorization: token,
+        "x-access-token": localStorage.getItem("token"),
       },
     };
-    const data = {
-      movie_id: id,
-    };
     await axios
-      .post(`${api.baseURL}admin/delete-movie/`, data, configToken)
-      .then(() => {
+      .delete(`${api.baseURL}category/delete/${id}/`, config)
+      .then((response) => {
         setDeleted(true);
-        alert("Deleted Successfully!!");
-        getMovies();
+        getCategories();
       })
       .catch((error) => {
         console.log(error);
@@ -79,32 +65,31 @@ export default function Movies() {
     >
       <Toolbar />
       <Container>
-        <Typography variant="h4">List of all movies</Typography>
+        <Typography variant="h4">List of all category</Typography>
         <Grid container spacing={4}>
-          {movies.map((movie, index) => (
+          {categories.map((category, index) => (
             <Grid item xs={5} key={index}>
               <Card>
                 <CardMedia
                   sx={{ height: 140 }}
-                  image={movie.image}
-                  title={movie.movie_title}
+                  image={category.image}
+                  // image="https://source.unsplash.com/random"
+                  title={category.name}
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h5">
-                    {movie.movie_title}
-                  </Typography>
-                  <Typography gutterBottom variant="body2">
-                    {movie.description}
-                  </Typography>
-                  <Typography gutterBottom variant="subtitle2">
-                    {movie.release_date}
+                  <Typography gutterBottom variant="h5" component="div">
+                    {category.name}
                   </Typography>
                 </CardContent>
                 <CardActions>
+                  <UpdateCategory
+                    id={category.id}
+                    getCategories={getCategories}
+                  />
                   <Button
                     color="error"
                     onClick={() => {
-                      handleDelete(movie._id);
+                      handleDelete(category.id);
                     }}
                   >
                     Delete

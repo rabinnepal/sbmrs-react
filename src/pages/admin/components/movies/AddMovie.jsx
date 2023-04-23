@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { Button, TextField } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
-import { APIClass } from "../../../APICaller/APICaller";
+import { APIClass } from "../../../../APICaller/APICaller";
 
 const drawerWidth = 240;
 export default function AddMovie() {
@@ -77,6 +77,8 @@ export default function AddMovie() {
         <TextField
           variant="outlined"
           name="description"
+          multiline
+          rows={4}
           width="100%"
           label="Add movie description"
           fullWidth

@@ -15,9 +15,10 @@ import UserProfile from "./pages/user/profile/UserProfile";
 import Setting from "./pages/user/settings/Settings";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import ApproveVendors from "./pages/admin/components/ApproveVendors";
-import AddCategory from "./pages/admin/components/AddCategory";
-import AddMovie from "./pages/admin/components/AddMovie";
-import Movies from "./pages/admin/components/Movies";
+import AddCategory from "./pages/admin/components/category/AddCategory";
+import Movies from "./pages/admin/components/movies/Movies";
+import DisplayUser from "./pages/admin/components/user/DisplayUser";
+import AddMovie from "./pages/admin/components/movies/AddMovie";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -42,6 +43,7 @@ function App() {
         <Route path="/admin/" element={<AdminDashboard />}>
           <Route path="/admin/approve-vendors/" element={<ApproveVendors />} />
           <Route path="/admin/display-movies/" element={<Movies />} />
+          <Route path="/admin/display-users/" element={<DisplayUser />} />
           <Route path="/admin/add-movie/" element={<AddMovie />} />
           <Route path="/admin/category/" element={<AddCategory />} />
         </Route>

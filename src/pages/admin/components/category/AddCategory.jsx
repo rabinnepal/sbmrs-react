@@ -4,7 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Button, TextField } from "@mui/material";
 import axios from "axios";
-import { APIClass } from "../../../APICaller/APICaller";
+import { APIClass } from "../../../../APICaller/APICaller";
 
 const drawerWidth = 240;
 export default function AddCategory() {
@@ -54,7 +54,7 @@ export default function AddCategory() {
       }}
     >
       <Toolbar />
-      <Typography variant="h4">Add Banner</Typography>
+      <Typography variant="h4">Add Category</Typography>
       <Box
         component="form"
         encType="multi-part"
