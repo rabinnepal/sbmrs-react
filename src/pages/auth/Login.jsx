@@ -32,21 +32,21 @@ export default function Login() {
       password: data.get("password"),
     };
     await axios
-      .post(`${api.baseURL}user/login`, formData, api.config)
+      .post(`${api.baseURL}user/login`, formData, api.configData)
       .then((res) => {
         console.log(res);
-        // if (res.data.status === 200) {
-        //   localStorage.setItem("token", res.data.token);
+        if (res.data.success === true) {
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("id", res.data.user._id);
 
-        //   if (res.data.emailExists.role === "User") {
-        //     window.location.href = "/";
-        //     // } else {
-        //     //   window.location.href = "/admin/approve-vendors";
-        //     // }
-        //   } else {
-        //     alert("error");
-        //   }
-        // }
+          if (res.data.user.role === "User") {
+            window.location.href = "/";
+          } else if (res.data.user.role === "Admin") {
+            window.location.href = "/admin/approve-vendors";
+          } else {
+            alert("error");
+          }
+        }
       })
       .catch((err) => {
         console.log(err);

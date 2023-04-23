@@ -1,15 +1,39 @@
 import { Box, Button, Rating, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { APIClass } from "../../../APICaller/APICaller";
+import axios from "axios";
 
-const ViewMovieRating = () => {
+const ViewMovieRating = ({ id }) => {
+  const api = new APIClass();
+  const [value, setValue] = useState();
+  const [user, setUser] = useState();
+  const [movie, setMovie] = useState();
+
+  const token = localStorage.getItem("token");
+
+  const getMovie = async (e, id) => {
+    const configData = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    console.log(token);
+    await axios
+      .post(`${api.baseURL}user/view-movie/${id}`, "", configData)
+      .then((res) => {
+        console.log(res);
+        setMovie(res.data.movie);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    getMovie();
+  }, []);
   return (
     <Box>
-      <Typography
-        variant="h5"
-        sx={{ textAlign: "center", pt: 3, fontWeight: 600 }}
-      >
-        Sentiment Based Movie Rating System
-      </Typography>
       <Box
         sx={{
           display: "flex",
@@ -40,7 +64,9 @@ const ViewMovieRating = () => {
           </Typography>
           <Rating name="rating" value={3} readOnly sx={{ border: "ridge" }} />
         </Box>
-        <Button variant="contained">Add your comment</Button>
+        <Link to="/feedback" style={{ textDecoration: "none" }}>
+          <Button variant="contained">Add your comment</Button>
+        </Link>
       </Box>
     </Box>
   );

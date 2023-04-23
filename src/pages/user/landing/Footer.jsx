@@ -10,8 +10,9 @@ function Copyright() {
     <Typography variant="body2" color="black">
       {"Copyright © "}
       <Link href="/" style={{ color: "black", textDecoration: "none" }}>
-        Kaam-Wala
+        SBMRS
       </Link>
+      <span> </span>
       {new Date().getFullYear()}
     </Typography>
   );
@@ -42,14 +43,6 @@ export default function Footer() {
               Home
             </Link>
           </Grid>
-          {/* <Grid item xs={4}>
-            <Link
-              to="/about"
-              style={{ color: "black", textDecoration: "none" }}
-            >
-              About Us
-            </Link>
-          </Grid> */}
 
           <Grid item xs={4}>
             <Link
@@ -57,6 +50,14 @@ export default function Footer() {
               style={{ color: "black", textDecoration: "none" }}
             >
               Profile
+            </Link>
+          </Grid>
+          <Grid item xs={4}>
+            <Link
+              to="/settings"
+              style={{ color: "black", textDecoration: "none" }}
+            >
+              Settings
             </Link>
           </Grid>
         </Grid>

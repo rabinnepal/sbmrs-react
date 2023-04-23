@@ -32,7 +32,7 @@ export default function Register() {
       password: data.get("password"),
     };
     await axios
-      .post(`${api.baseURL}user/register`, formData, api.config)
+      .post(`${api.baseURL}user/register`, formData, api.configData)
       .then((res) => {
         console.log(res);
         // window.location.href = "login/";
