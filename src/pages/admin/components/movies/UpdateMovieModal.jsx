@@ -59,9 +59,9 @@ const UpdateMovieModal = ({ id }) => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     };
-
+    console.log(id);
     await axios
-      .post(`${api.baseURL}admin/update-movie/${id}`, config)
+      .post(`${api.baseURL}admin/update-movie/${id}`, formData, config)
       .then((res) => {
         if (res.data.success === true) {
           console.log(res.data);
@@ -87,7 +87,7 @@ const UpdateMovieModal = ({ id }) => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style} component="form">
+          <Box sx={style} component="form" onSubmit={handleSubmit}>
             <TextField
               variant="outlined"
               name="title"

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -6,8 +6,34 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Box, Container, Typography } from "@mui/material";
 import { Navigation } from "swiper";
+import axios from "axios";
+import { APIClass } from "../../../APICaller/APICaller";
+import { useNavigate } from "react-router-dom";
 
 const TopMovies = () => {
+  const [movies, setMovies] = useState([]);
+  const [deleted, setDeleted] = useState([]);
+  const navigate = useNavigate();
+
+  const api = new APIClass();
+  const token = `Bearer ${localStorage.getItem("token")}`;
+
+  // // display  all banners
+  const getMovies = useCallback(async (e) => {
+    const configToken = {
+      headers: {
+        Authorization: token,
+      },
+    };
+    const res = await axios.get(`${api.baseURL}user/view-movies/`, configToken);
+    console.log(res.data);
+    setMovies(res.data.movies);
+  }, []);
+
+  useEffect(() => {
+    getMovies();
+  }, [getMovies]);
+
   return (
     <div>
       <Container>
@@ -20,7 +46,6 @@ const TopMovies = () => {
           spaceBetween={50}
           slidesPerView={5}
           scrollbar={{ draggable: false }}
-          //   device={((ios = true), (android = true))}
           breakpoints={{
             320: {
               slidesPerView: 2,
@@ -44,60 +69,20 @@ const TopMovies = () => {
             },
           }}
         >
-          <SwiperSlide>
-            <Box sx={{ p: 2 }}>
-              <img
-                src="https://picsum.photos/200/300"
-                alt="movie"
-                style={{ borderRadius: 20 }}
-              />
-            </Box>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Box sx={{ p: 2 }}>
-              <img
-                src="https://picsum.photos/200/300"
-                alt="movie"
-                style={{ borderRadius: 20 }}
-              />
-            </Box>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Box sx={{ p: 2 }}>
-              <img
-                src="https://picsum.photos/200/300"
-                alt="movie"
-                style={{ borderRadius: 20 }}
-              />
-            </Box>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Box sx={{ p: 2 }}>
-              <img
-                src="https://picsum.photos/200/300"
-                alt="movie"
-                style={{ borderRadius: 20 }}
-              />
-            </Box>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Box sx={{ p: 2 }}>
-              <img
-                src="https://picsum.photos/200/300"
-                alt="movie"
-                style={{ borderRadius: 20 }}
-              />
-            </Box>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Box sx={{ p: 2 }}>
-              <img
-                src="https://picsum.photos/200/300"
-                alt="movie"
-                style={{ borderRadius: 20 }}
-              />
-            </Box>
-          </SwiperSlide>
+          {movies.map((movie, index) => {
+            return (
+              <SwiperSlide>
+                <Box sx={{ p: 2 }}>
+                  <img
+                    src={movie.image}
+                    alt="movie"
+                    style={{ borderRadius: 20 }}
+                    onClick={(e) => navigate(`/rating/${movie._id}`)}
+                  />
+                </Box>
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
       </Container>
     </div>

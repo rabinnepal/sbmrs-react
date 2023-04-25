@@ -40,6 +40,7 @@ const ViewMovieRating = ({ id }) => {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
+          my: 2,
         }}
       >
         <Typography
@@ -48,7 +49,10 @@ const ViewMovieRating = ({ id }) => {
         >
           Aquaman 2
         </Typography>
-        <Typography variant="body1" sx={{ fontWeight: 600, fontSize: 18 }}>
+        <Typography
+          variant="body1"
+          sx={{ fontWeight: 600, fontSize: 18, my: 2 }}
+        >
           Aquaman forges an uneasy alliance with an unlikely ally to save
           Atlantis and the rest of the planet.
         </Typography>

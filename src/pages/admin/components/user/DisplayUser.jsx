@@ -93,10 +93,11 @@ export default function DisplayUser() {
             <TableHead>
               <TableRow sx={{ bgcolor: "lightblue" }}>
                 <TableCell>Username</TableCell>
+                <TableCell align="right">Profile</TableCell>
                 <TableCell align="right">Fullname</TableCell>
                 <TableCell align="right">Email</TableCell>
                 <TableCell align="right">Role</TableCell>
-                <TableCell align="right">Action</TableCell>
+                {/* <TableCell align="right">Action</TableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -107,6 +108,14 @@ export default function DisplayUser() {
                 >
                   <TableCell component="th" scope="row">
                     {user.userName}
+                  </TableCell>
+                  <TableCell align="right">
+                    <img
+                      src={user.profilePicture}
+                      alt={user.fullName}
+                      height={100}
+                      width={100}
+                    />
                   </TableCell>
                   <TableCell align="right">{user.fullName}</TableCell>
                   <TableCell align="right">{user.email}</TableCell>

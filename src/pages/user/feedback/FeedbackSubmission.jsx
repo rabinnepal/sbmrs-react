@@ -7,8 +7,47 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { APIClass } from "../../../APICaller/APICaller";
+import axios from "axios";
 
 const FeedbackSubmission = () => {
+  // const api = new APIClass();
+
+  // // add banner
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const data = new FormData(e.currentTarget);
+  //   let formData = {
+  //     comment: data.get("comment"),
+  //     rating: data.get("rating"),
+  //     // movie_id: data.get("category"),
+  //   };
+  //   let config = {
+  //     headers: {
+  //       "Content-Type": "multipart/form-data",
+  //       Accept: "application/json",
+  //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //     },
+  //   };
+
+  //   await axios
+  //     .post(`${api.baseURL}user/add-comments/`, formData, config)
+  //     .then((res) => {
+  //       if (res.data.success === true) {
+  //         console.log(res.data);
+  //         window.alert("Added Successfully!!");
+  //         e.target.reset();
+  //       } else {
+  //         console.log(res.data);
+  //         window.alert("Task failed!!");
+  //         e.target.reset();
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
   return (
     <Box>
       <Typography

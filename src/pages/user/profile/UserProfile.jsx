@@ -120,8 +120,8 @@ function UserProfile() {
                   opacity: 0.85,
                 },
               }}
-              src="https://picsum.photos/300/300"
-              //   src={user?.image}
+              // src="https://picsum.photos/300/300"
+              src={user?.profilePicture}
               onClick={handleOpen}
             />
             {/* <Modal open={open} onClose={handleClose}>

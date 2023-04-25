@@ -33,7 +33,7 @@ function App() {
         <Route path="/" element={<LandingLayout />}>
           <Route path="" element={<LandingMain />} />
           <Route path="/profile" element={<UserProfile />} />
-          <Route path="/rating" element={<ViewMovieRating />} />
+          <Route path="/rating:id" element={<ViewMovieRating />} />
           <Route path="/feedback" element={<UserFeedback />} />
           <Route path="/feedback-submission" element={<FeedbackSubmission />} />
           <Route path="/settings" element={<Setting />} />

@@ -114,8 +114,7 @@ const ViewSingleMovieModal = ({ id }) => {
               Category:{movie?.categories[0].category}
             </Typography>
             <img
-              src="https://picsum.photos/200/300"
-              // src={movie?.image}
+              src={movie?.image}
               alt={movie?.movie_title}
               height={400}
               width={200}
