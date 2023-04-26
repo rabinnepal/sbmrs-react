@@ -1,18 +1,21 @@
 import { Box, Button, Rating, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useCallback, useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { APIClass } from "../../../APICaller/APICaller";
 import axios from "axios";
 
-const ViewMovieRating = ({ id }) => {
+const ViewMovieRating = () => {
   const api = new APIClass();
   const [value, setValue] = useState();
-  const [user, setUser] = useState();
   const [movie, setMovie] = useState();
+  const navigate = useNavigate();
+
+  const { id } = useParams();
+  console.log(id);
 
   const token = localStorage.getItem("token");
 
-  const getMovie = async (e, id) => {
+  const getMovie = useCallback(async () => {
     const configData = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -20,7 +23,7 @@ const ViewMovieRating = ({ id }) => {
     };
     console.log(token);
     await axios
-      .post(`${api.baseURL}user/view-movie/${id}`, "", configData)
+      .get(`${api.baseURL}user/view-movie/${id}`, configData)
       .then((res) => {
         console.log(res);
         setMovie(res.data.movie);
@@ -28,10 +31,11 @@ const ViewMovieRating = ({ id }) => {
       .catch((err) => {
         console.log(err);
       });
-  };
+  }, []);
   useEffect(() => {
     getMovie();
   }, []);
+  console.log(movie);
   return (
     <Box>
       <Box
@@ -47,18 +51,17 @@ const ViewMovieRating = ({ id }) => {
           variant="h6"
           sx={{ color: "#7987FF", fontWeight: "bold", fontSize: 26 }}
         >
-          Aquaman 2
+          {movie?.movie_title}
         </Typography>
         <Typography
           variant="body1"
           sx={{ fontWeight: 600, fontSize: 18, my: 2 }}
         >
-          Aquaman forges an uneasy alliance with an unlikely ally to save
-          Atlantis and the rest of the planet.
+          {movie?.description}
         </Typography>
         <img
-          src="https://picsum.photos/200/300"
-          alt="image"
+          src={movie?.image}
+          alt={movie?.movie_title}
           height={400}
           width={200}
         />
@@ -67,8 +70,15 @@ const ViewMovieRating = ({ id }) => {
             Overall Rating
           </Typography>
           <Rating name="rating" value={3} readOnly sx={{ border: "ridge" }} />
+          (api not done)
         </Box>
-        <Link to="/feedback" style={{ textDecoration: "none" }}>
+        <Link
+          to={{
+            pathname: `/feedback/${id}`,
+            state: { movies: movie },
+          }}
+          style={{ textDecoration: "none" }}
+        >
           <Button variant="contained">Add your comment</Button>
         </Link>
       </Box>

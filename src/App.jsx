@@ -33,9 +33,9 @@ function App() {
         <Route path="/" element={<LandingLayout />}>
           <Route path="" element={<LandingMain />} />
           <Route path="/profile" element={<UserProfile />} />
-          <Route path="/rating:id" element={<ViewMovieRating />} />
-          <Route path="/feedback" element={<UserFeedback />} />
-          <Route path="/feedback-submission" element={<FeedbackSubmission />} />
+          <Route path="/rating/:id" element={<ViewMovieRating />} />
+          <Route path="/feedback/:id" element={<UserFeedback />} />
+          {/* <Route path="/feedback-submission" element={<FeedbackSubmission />} /> */}
           <Route path="/settings" element={<Setting />} />
         </Route>
         {/* navbar and footer outlet end */}

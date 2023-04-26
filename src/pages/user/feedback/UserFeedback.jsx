@@ -1,15 +1,43 @@
 import { Box, Button, Rating, TextField, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { APIClass } from "../../../APICaller/APICaller";
 import axios from "axios";
+import { useLocation, useParams } from "react-router-dom";
 
 const UserFeedback = () => {
   const api = new APIClass();
   const [value, setValue] = useState();
-  const [user, setUser] = useState();
   const [message, setMessage] = useState();
+  const [movie, setMovie] = useState();
+
+  const { id } = useParams();
+  // const location = useLocation();
+  // console.log(location);
+  // const { movies } = location.state.movies;
+  // console.log(movies);
 
   const token = localStorage.getItem("token");
+
+  const getMovie = useCallback(async () => {
+    const configData = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    console.log(token);
+    await axios
+      .get(`${api.baseURL}user/view-movie/${id}`, configData)
+      .then((res) => {
+        console.log(res);
+        setMovie(res.data.movie);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  useEffect(() => {
+    getMovie();
+  }, []);
 
   const addComment = async (e) => {
     e.preventDefault();
@@ -24,14 +52,19 @@ const UserFeedback = () => {
     const formData = {
       rating: value,
       comment: data.get("message"),
-      movie_id: "kas",
+      movie_id: id,
     };
     console.log(token);
     await axios
       .post(`${api.baseURL}user/add-comments`, formData, configData)
       .then((res) => {
-        console.log(res);
-        setMessage(res.data.commentAndReview);
+        if (res.data.success === true) {
+          console.log(res);
+          setMessage(res.data.commentAndReview);
+          alert("Comment Added Successfully!!");
+        } else {
+          alert(res.data.message);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -52,15 +85,14 @@ const UserFeedback = () => {
         variant="h6"
         sx={{ color: "#7987FF", fontWeight: "bold", fontSize: 26 }}
       >
-        Aquaman 2
+        {movie?.movie_title}
       </Typography>
       <Typography variant="body1" sx={{ fontWeight: 600, fontSize: 18, mb: 2 }}>
-        Aquaman forges an uneasy alliance with an unlikely ally to save Atlantis
-        and the rest of the planet.
+        {movie?.description}
       </Typography>
       <img
-        src="https://picsum.photos/200/300"
-        alt="image"
+        src={movie?.image}
+        alt={movie?.movie_title}
         height={400}
         width={200}
       />
@@ -92,7 +124,11 @@ const UserFeedback = () => {
           placeholder="Write your comment here"
           sx={{ width: 500 }}
         />
-        <Button variant="contained" type="submit">
+        <Button
+          variant="contained"
+          type="submit"
+          onSubmit={() => navigate(`/feedback-submission`)}
+        >
           Submit
         </Button>
       </Box>

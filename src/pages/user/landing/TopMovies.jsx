@@ -34,6 +34,15 @@ const TopMovies = () => {
     getMovies();
   }, [getMovies]);
 
+  // sort the artist from new to old
+  // useEffect(() => {
+  //   const sortedarray = users.sort((a, b) => {
+  //     return true && b.id - a.id;
+  //   });
+  //   setSort(sortedarray);
+  // });
+  // {sort.slice(0, 10).map((user) => ( //map garda
+
   return (
     <div>
       <Container>
@@ -69,9 +78,9 @@ const TopMovies = () => {
             },
           }}
         >
-          {movies.map((movie, index) => {
+          {movies?.map((movie, index) => {
             return (
-              <SwiperSlide>
+              <SwiperSlide key={index}>
                 <Box sx={{ p: 2 }}>
                   <img
                     src={movie.image}
