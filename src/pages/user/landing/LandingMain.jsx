@@ -4,6 +4,7 @@ import ComingSoon from "./ComingSoon";
 import TopMovies from "./TopMovies";
 import { Box, Container, InputAdornment, TextField } from "@mui/material";
 import { Search } from "@mui/icons-material";
+import NewMovies from "./NewMovies";
 
 const LandingMain = () => {
   return (
@@ -22,8 +23,9 @@ const LandingMain = () => {
         />
       </Container>
       <NowPlaying />
-      <ComingSoon />
       <TopMovies />
+      {/* <ComingSoon /> */}
+      <NewMovies />
     </div>
   );
 };
