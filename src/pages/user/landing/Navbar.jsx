@@ -122,7 +122,7 @@ function Navbar() {
                 Home
               </Button>
             </Link>
-            <Link to="#">
+            <Link to="/movies">
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}

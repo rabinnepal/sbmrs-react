@@ -25,7 +25,7 @@ export default function Footer() {
       sx={{
         py: 3,
         px: 2,
-        mt: "auto",
+        marginTop: "auto",
         backgroundColor: "#FFF",
         boxShadow: 20,
         bottom: 0,

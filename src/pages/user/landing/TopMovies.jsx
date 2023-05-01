@@ -106,7 +106,7 @@ const TopMovies = () => {
                       <Box sx={{ p: 2 }}>
                         <img
                           src={movie.movie_id.image}
-                          alt={movie.movie_id.movie_name}
+                          alt={movie.movie_id.movie_title}
                           style={{ borderRadius: 20, height: 200 }}
                           onClick={(e) =>
                             navigate(`/rating/${movie.movie_id._id}`)

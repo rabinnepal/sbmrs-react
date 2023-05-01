@@ -5,27 +5,22 @@ import TopMovies from "./TopMovies";
 import { Box, Container, InputAdornment, TextField } from "@mui/material";
 import { Search } from "@mui/icons-material";
 import NewMovies from "./NewMovies";
+import Banner from "./Banner";
+import Explore from "./Explore";
+import SearchMovies from "./SearchMovies";
 
 const LandingMain = () => {
   return (
-    <div>
-      <Container sx={{ textAlign: "center", my: 2 }}>
-        <TextField
-          placeholder="Search"
-          fullWidth
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <Search />
-              </InputAdornment>
-            ),
-          }}
-        />
-      </Container>
-      <NowPlaying />
+    <div
+      style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+    >
+      <Banner />
+      <SearchMovies />
+      {/* <NowPlaying /> */}
       <TopMovies />
       {/* <ComingSoon /> */}
       <NewMovies />
+      <Explore />
     </div>
   );
 };

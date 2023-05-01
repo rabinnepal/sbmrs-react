@@ -19,6 +19,7 @@ import AddCategory from "./pages/admin/components/category/AddCategory";
 import Movies from "./pages/admin/components/movies/Movies";
 import DisplayUser from "./pages/admin/components/user/DisplayUser";
 import AddMovie from "./pages/admin/components/movies/AddMovie";
+import AllMovies from "./pages/user/movies/AllMovies";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -32,6 +33,7 @@ function App() {
 
         <Route path="/" element={<LandingLayout />}>
           <Route path="" element={<LandingMain />} />
+          <Route path="/movies" element={<AllMovies />} />
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/rating/:id" element={<ViewMovieRating />} />
           <Route path="/feedback/:id" element={<UserFeedback />} />
