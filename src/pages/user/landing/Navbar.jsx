@@ -94,7 +94,7 @@ function Navbar() {
                 </Link>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Link to="#" textAlign="center">
+                <Link to="/movies" textAlign="center">
                   Movies
                 </Link>
               </MenuItem>

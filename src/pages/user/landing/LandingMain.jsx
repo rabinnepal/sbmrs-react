@@ -8,6 +8,7 @@ import NewMovies from "./NewMovies";
 import Banner from "./Banner";
 import Explore from "./Explore";
 import SearchMovies from "./SearchMovies";
+import NewReleased from "./NewReleased";
 
 const LandingMain = () => {
   return (
@@ -18,7 +19,7 @@ const LandingMain = () => {
       <SearchMovies />
       {/* <NowPlaying /> */}
       <TopMovies />
-      {/* <ComingSoon /> */}
+      <NewReleased />
       <NewMovies />
       <Explore />
     </div>

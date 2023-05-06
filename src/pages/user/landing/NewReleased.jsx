@@ -10,7 +10,7 @@ import axios from "axios";
 import { APIClass } from "../../../APICaller/APICaller";
 import { useNavigate } from "react-router-dom";
 
-const NewMovies = () => {
+const NewReleased = () => {
   const [movies, setMovies] = useState([]);
   const [sort, setSort] = useState([]);
   const navigate = useNavigate();
@@ -25,7 +25,10 @@ const NewMovies = () => {
         Authorization: token,
       },
     };
-    const res = await axios.get(`${api.baseURL}user/view-movies/`, configToken);
+    const res = await axios.get(
+      `${api.baseURL}user/get-newlyreleased-movies/`,
+      configToken
+    );
     console.log(res.data);
     setMovies(res.data.movies);
   }, []);
@@ -33,12 +36,13 @@ const NewMovies = () => {
   useEffect(() => {
     getMovies();
   }, [getMovies]);
+  console.log(movies);
 
   return (
     <div>
       <Container>
         <Typography sx={{ ml: 2, fontWeight: 600, fontSize: 20 }}>
-          Newly Added Movies
+          Newly Released Movies
         </Typography>
         <Swiper
           navigation={true}
@@ -92,4 +96,4 @@ const NewMovies = () => {
   );
 };
 
-export default NewMovies;
+export default NewReleased;

@@ -26,35 +26,19 @@ const TopMovies = () => {
       },
     };
     const res = await axios.get(
-      `${api.baseURL}user/rated-movies/`,
+      `${api.baseURL}user/get-toprated-movies/`,
       configToken
     );
     console.log(res.data);
     setMovies(res.data.movies);
-    for (let index = 0; index < res.data.movies.length; index++) {
-      let rating = res.data.movies[index].score;
-    }
+    // for (let index = 0; index < res.data.movies.length; index++) {
+    //   let rating = res.data.movies[index].score;
+    // }
   }, []);
 
   useEffect(() => {
     getMovies();
   }, [getMovies]);
-
-  // const combinedData = movies?.flatMap((trip) =>
-  //   trip.score.map((order) => ({
-  //     ...order,
-  //   }))
-  // );
-  // console.log(combinedData, "combine");
-
-  // sort the artist from new to old
-  // useEffect(() => {
-  //   const sortedarray = users.sort((a, b) => {
-  //     return true && b.id - a.id;
-  //   });
-  //   setSort(sortedarray);
-  // });
-  // {sort.slice(0, 10).map((user) => ( //map garda
 
   return (
     <div>
