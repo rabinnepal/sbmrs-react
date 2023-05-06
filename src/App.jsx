@@ -11,7 +11,6 @@ import UserFeedback from "./pages/user/feedback/UserFeedback";
 import FeedbackSubmission from "./pages/user/feedback/FeedbackSubmission";
 import LandingLayout from "./pages/user/landing/LandingLayout";
 import LandingMain from "./pages/user/landing/LandingMain";
-import UserProfile from "./pages/user/profile/UserProfile";
 import Setting from "./pages/user/settings/Settings";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import ApproveVendors from "./pages/admin/components/ApproveVendors";
@@ -20,6 +19,7 @@ import Movies from "./pages/admin/components/movies/Movies";
 import DisplayUser from "./pages/admin/components/user/DisplayUser";
 import AddMovie from "./pages/admin/components/movies/AddMovie";
 import AllMovies from "./pages/user/movies/AllMovies";
+import UserProfile from "./pages/user/profile/UserProfile";
 
 function App() {
   const [count, setCount] = useState(0);

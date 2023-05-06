@@ -18,7 +18,7 @@ const TopMovies = () => {
   const api = new APIClass();
   const token = `Bearer ${localStorage.getItem("token")}`;
 
-  // // display  all banners
+  // // display  top movies
   const getMovies = useCallback(async (e) => {
     const configToken = {
       headers: {
@@ -33,12 +33,6 @@ const TopMovies = () => {
     setMovies(res.data.movies);
     for (let index = 0; index < res.data.movies.length; index++) {
       let rating = res.data.movies[index].score;
-      console.log(rating);
-      // let sum = 0;
-      // for (const rat of rating) {
-      //   if (rat.rating) sum += rat.rating;
-      // }
-      // console.log(sum);
     }
   }, []);
 
@@ -101,12 +95,12 @@ const TopMovies = () => {
             return (
               <SwiperSlide key={index}>
                 {() => {
-                  if (movie.score[0].rating >= 4)
+                  if (movie?.score[0].rating >= 4)
                     return (
                       <Box sx={{ p: 2 }}>
                         <img
-                          src={movie.movie_id.image}
-                          alt={movie.movie_id.movie_title}
+                          src={movie.movie_id?.image}
+                          alt={movie.movie_id?.movie_title}
                           style={{ borderRadius: 20, height: 200 }}
                           onClick={(e) =>
                             navigate(`/rating/${movie.movie_id._id}`)

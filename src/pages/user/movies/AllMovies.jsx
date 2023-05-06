@@ -93,6 +93,7 @@ const AllMovies = () => {
                 </Grid>
               );
             })}
+            <Box sx={{ height: "64vh" }} />
           </Grid>
         )}
       </Container>

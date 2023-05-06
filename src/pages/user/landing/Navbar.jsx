@@ -33,6 +33,11 @@ function Navbar() {
     setAnchorElUser(null);
   };
 
+  const logout = () => {
+    localStorage.clear();
+    window.location.href = "/login";
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -168,7 +173,17 @@ function Navbar() {
                 </Link>
               </MenuItem>
               <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">Logout</Typography>
+                <Link
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    marginTop: 3,
+                    marginBottom: 4,
+                  }}
+                  onClick={logout}
+                >
+                  <Typography textAlign="center">Log Out</Typography>
+                </Link>
               </MenuItem>
             </Menu>
           </Box>

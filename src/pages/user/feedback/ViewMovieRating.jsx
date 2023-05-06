@@ -35,7 +35,7 @@ const ViewMovieRating = () => {
   useEffect(() => {
     getMovie();
   }, []);
-  console.log(movie);
+
   return (
     <Box>
       <Box
@@ -80,6 +80,7 @@ const ViewMovieRating = () => {
           style={{ textDecoration: "none" }}
         >
           <Button variant="contained">Add your comment</Button>
+          <Box sx={{ height: "15vh" }} />
         </Link>
       </Box>
     </Box>

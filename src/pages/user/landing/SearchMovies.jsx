@@ -22,7 +22,6 @@ const SearchMovies = () => {
   const [sort, setSort] = useState([]);
   const [q, setQ] = useState("");
   const navigate = useNavigate();
-  console.log(q, "q");
 
   const api = new APIClass();
   const token = `Bearer ${localStorage.getItem("token")}`;
@@ -38,7 +37,6 @@ const SearchMovies = () => {
       const formData = {
         searchText: q,
       };
-      console.log(formData, "formData");
       const res = await axios.post(
         `${api.baseURL}user/search-movies/`,
         formData,
@@ -53,7 +51,6 @@ const SearchMovies = () => {
   useEffect(() => {
     searchMovies();
   }, [searchMovies]);
-  console.log(movies);
 
   return (
     <div>

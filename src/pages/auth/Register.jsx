@@ -31,6 +31,13 @@ export default function Register() {
       email: data.get("email"),
       password: data.get("password"),
     };
+    let password = data.get("password");
+    let repassword = data.get("reassword");
+    if (password !== repassword) {
+      alert("Passwords don't match!");
+      return;
+    }
+
     await axios
       .post(`${api.baseURL}user/register`, formData, api.configData)
       .then((res) => {
@@ -137,7 +144,7 @@ export default function Register() {
               type="password"
               size="small"
               label="Re-enter your password"
-              name="re-password"
+              name="repassword"
             />
           </Grid>
 

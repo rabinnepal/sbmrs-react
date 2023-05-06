@@ -61,40 +61,9 @@ function UserProfile() {
     getProfile();
   }, []);
 
-  //   // change profile
-  //   const fetchData = async (e) => {
-  //     e.preventDefault();
-
-  //     let config = {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     };
-  //     const formData = new FormData();
-  //     formData.append("image", profile);
-
-  //     axios
-  //       .patch(`${api.baseURL}user/profile`, formData, config)
-  //       .then((res) => {
-  //         console.log(res);
-  //         alert("success");
-  //         getProfile();
-  //         setOpen(false);
-  //       })
-  //       .catch((e) => console.log(e.message));
-  //   };
-
   return (
     <>
-      <Box
-        bgcolor="#grey"
-        sx={
-          {
-            //   height: "500px",
-            //   position: "relative",
-          }
-        }
-      >
+      <Box bgcolor="#grey">
         <Container>
           <Box
             sx={{
@@ -108,9 +77,6 @@ function UserProfile() {
             </Typography>
             <Avatar
               sx={{
-                // position: "absolute",
-                // bottom: -150,
-                // left: 200,
                 width: 200,
                 height: 200,
                 border: "solid grey 10px",
@@ -120,35 +86,10 @@ function UserProfile() {
                   opacity: 0.85,
                 },
               }}
-              // src="https://picsum.photos/300/300"
               src={user?.profilePicture}
               onClick={handleOpen}
             />
-            {/* <Modal open={open} onClose={handleClose}>
-              <Box
-                sx={style}
-                // component="form"
-                // encType="multi-part"
-                // onSubmit={(e) => fetchData(e)}
-              >
-                <TextField
-                  type="file"
-                  variant="outlined"
-                  name="file"
-                  sx={{ my: 3 }}
-                  //   onChange={(e) => setProfile(e.target.files[0])}
-                  required
-                />
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="success"
-                  sx={{ display: "block", px: 3, ml: 2, mb: 5 }}
-                >
-                  Upload
-                </Button>
-              </Box>
-            </Modal> */}
+
             <div style={{ color: "#000", marginTop: "30px" }}>
               <Box sx={{ display: "flex", gap: 2 }}>
                 <Typography
@@ -188,15 +129,15 @@ function UserProfile() {
               </Box>
             </div>
           </Box>
-          <Box sx={{ height: 100, mt: 4 }}>
+          {/* <Box sx={{ height: 100, mt: 4 }}>
             <Button variant="contained" startIcon={<Settings />}>
               Settings
             </Button>
-          </Box>
+          </Box> */}
         </Container>
       </Box>
 
-      {/* <Box bgcolor="#grey" sx={{ height: "200px" }}></Box> */}
+      <Box bgcolor="#grey" sx={{ height: "100px" }}></Box>
     </>
   );
 }
