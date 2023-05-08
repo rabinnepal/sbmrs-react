@@ -7,7 +7,7 @@ import axios from "axios";
 const ViewMovieRating = () => {
   const api = new APIClass();
   const [value, setValue] = useState();
-  const [movie, setMovie] = useState();
+  const [movies, setMovies] = useState();
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -21,68 +21,79 @@ const ViewMovieRating = () => {
         Authorization: `Bearer ${token}`,
       },
     };
-    console.log(token);
     await axios
       .get(`${api.baseURL}user/view-movie/${id}`, configData)
       .then((res) => {
-        console.log(res);
-        setMovie(res.data.movie);
+        console.log(res.data);
+        setMovies(res.data.movie);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
   useEffect(() => {
-    getMovie();
+    if (id) {
+      getMovie();
+    }
   }, []);
+  // const movie= movie[0].movie_id
 
   return (
     <Box>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          my: 2,
-        }}
-      >
-        <Typography
-          variant="h6"
-          sx={{ color: "#7987FF", fontWeight: "bold", fontSize: 26 }}
-        >
-          {movie?.movie_title}
-        </Typography>
-        <Typography
-          variant="body1"
-          sx={{ fontWeight: 600, fontSize: 18, my: 2 }}
-        >
-          {movie?.description}
-        </Typography>
-        <img
-          src={movie?.image}
-          alt={movie?.movie_title}
-          height={400}
-          width={200}
-        />
-        <Box sx={{ my: 5, display: "flex", gap: 3 }}>
-          <Typography sx={{ fontWeight: 600, fontSize: 18 }}>
-            Overall Rating
-          </Typography>
-          <Rating name="rating" value={3} readOnly sx={{ border: "ridge" }} />
-          (api not done)
-        </Box>
-        <Link
-          to={{
-            pathname: `/feedback/${id}`,
-            state: { movies: movie },
-          }}
-          style={{ textDecoration: "none" }}
-        >
-          <Button variant="contained">Add your comment</Button>
-          <Box sx={{ height: "15vh" }} />
-        </Link>
-      </Box>
+      {movies?.map((movie) => {
+        console.log(movie, "das");
+        return (
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              my: 2,
+            }}
+          >
+            <Typography
+              variant="h6"
+              sx={{ color: "#7987FF", fontWeight: "bold", fontSize: 26 }}
+            >
+              {movie?.movie_title}
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{ fontWeight: 600, fontSize: 18, my: 2 }}
+            >
+              {movie?.description}
+            </Typography>
+            <img
+              src={movie?.image}
+              alt={movie?.movie_title}
+              height={400}
+              width={200}
+            />
+            <Box sx={{ my: 5, display: "flex", gap: 3 }}>
+              <Typography sx={{ fontWeight: 600, fontSize: 18 }}>
+                Overall Rating
+              </Typography>
+              <Rating
+                name="rating"
+                value={movie[0].totalRating}
+                readOnly
+                sx={{ border: "ridge" }}
+              />
+            </Box>
+            <Link
+              to={{
+                pathname: `/feedback/${id}`,
+                state: { movies: movie },
+              }}
+              style={{ textDecoration: "none" }}
+            >
+              <Button variant="contained">Add your comment</Button>
+              <Box sx={{ height: "15vh" }} />
+            </Link>
+          </Box>
+        );
+      })}
     </Box>
   );
 };

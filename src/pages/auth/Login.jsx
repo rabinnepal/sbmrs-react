@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 
 const theme = createTheme();
 
-export default function Login() {
+export default function Login({ setIsAuthenticated }) {
   const api = new APIClass();
 
   const handleSubmit = async (e) => {
@@ -38,11 +38,12 @@ export default function Login() {
         if (res.data.success === true) {
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("id", res.data.user._id);
+          // setIsAuthenticated(true);
 
           if (res.data.user.role === "User") {
             window.location.href = "/";
           } else if (res.data.user.role === "Admin") {
-            window.location.href = "/admin/approve-vendors";
+            window.location.href = "/admin/display-movies";
           } else {
             alert("error");
           }

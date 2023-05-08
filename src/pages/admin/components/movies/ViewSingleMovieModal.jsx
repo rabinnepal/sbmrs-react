@@ -35,7 +35,7 @@ const ViewSingleMovieModal = ({ id }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [movie, setMovie] = useState();
+  const [movies, setMovies] = useState();
 
   const api = new APIClass();
   const token = localStorage.getItem("token");
@@ -49,17 +49,14 @@ const ViewSingleMovieModal = ({ id }) => {
     await axios
       .get(`${api.baseURL}admin/view-movie/${id}`, configToken)
       .then((res) => {
-        console.log(res.data);
-        setMovie(res.data.movie);
+        console.log(res, "fsadssda");
+        setMovies(res.data.movie);
       });
   }, []);
 
   useEffect(() => {
     getData();
   }, []);
-
-  console.log(movie, "dafsv");
-  //   display individual vendor
 
   return (
     <ThemeProvider theme={theme}>
@@ -82,44 +79,49 @@ const ViewSingleMovieModal = ({ id }) => {
           //   }}
           sx={style}
         >
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Typography
-              variant="h6"
-              sx={{ color: "#7987FF", fontWeight: "bold", fontSize: 26 }}
-            >
-              {movie?.movie_title}
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{ fontWeight: 600, fontSize: 18, mb: 2 }}
-            >
-              Description:{movie?.description}
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{ fontWeight: 600, fontSize: 18, mb: 2 }}
-            >
-              Release Date:{movie?.release_date}
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{ fontWeight: 600, fontSize: 18, mb: 2 }}
-            >
-              Category:{movie?.categories[0].category}
-            </Typography>
-            <img
-              src={movie?.image}
-              alt={movie?.movie_title}
-              height={400}
-              width={200}
-            />
-          </Box>
+          {movies?.map((movie) => {
+            console.log(movie, "das");
+            return (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  sx={{ color: "#7987FF", fontWeight: "bold", fontSize: 26 }}
+                >
+                  {movie?.movie_id.movie_title}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{ fontWeight: 600, fontSize: 18, mb: 2 }}
+                >
+                  Description:{movie?.movie_id.description}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{ fontWeight: 600, fontSize: 18, mb: 2 }}
+                >
+                  Release Date:{movie?.movie_id.release_date}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{ fontWeight: 600, fontSize: 18, mb: 2 }}
+                >
+                  {/* Category:{movie?.categories[0].category} */}
+                </Typography>
+                <img
+                  src={movie?.movie_id.image}
+                  alt={movie?.movie_id.movie_title}
+                  height={400}
+                  width={200}
+                />
+              </Box>
+            );
+          })}
         </Box>
       </Modal>
     </ThemeProvider>

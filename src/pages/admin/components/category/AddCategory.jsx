@@ -9,6 +9,7 @@ import { APIClass } from "../../../../APICaller/APICaller";
 const drawerWidth = 240;
 export default function AddCategory() {
   const api = new APIClass();
+  const id = localStorage.getItem("id");
 
   // add banner
 
@@ -17,13 +18,13 @@ export default function AddCategory() {
     const data = new FormData(e.currentTarget);
     let formData = {
       category: data.get("category"),
-      id: data.get("id"),
+      id: id,
     };
     let config = {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: `${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     };
 
@@ -70,16 +71,7 @@ export default function AddCategory() {
           sx={{ my: 2 }}
           required
         />
-        <TextField
-          variant="outlined"
-          name="id"
-          type="number"
-          width="100%"
-          label="Add category id"
-          fullWidth
-          sx={{ my: 2 }}
-          required
-        />
+
         {/* <Typography fontWeight="600">Upload image of category</Typography>
         <TextField
           type="file"

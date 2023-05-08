@@ -33,16 +33,16 @@ export default function Register() {
     };
     let password = data.get("password");
     let repassword = data.get("reassword");
-    if (password !== repassword) {
-      alert("Passwords don't match!");
-      return;
-    }
+    // if (password !== repassword) {
+    //   alert("Passwords don't match!");
+    //   return;
+    // }
 
     await axios
       .post(`${api.baseURL}user/register`, formData, api.configData)
       .then((res) => {
         console.log(res);
-        // window.location.href = "login/";
+        window.location.href = "/login";
       })
       .catch((err) => {
         console.log(err);
