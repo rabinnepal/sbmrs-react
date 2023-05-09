@@ -30,112 +30,50 @@ function PrivateRoute({ children }) {
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const authLayout = AuthController();
+  // const authLayout = AuthController(isAuthenticated, setIsAuthenticated);
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/login"
-          element={<Login setIsAuthenticated={setIsAuthenticated} />}
-        />
+        <Route path="/login" element={<Login />} />
 
         <Route path="/register" element={<Register />} />
         {/* navbar and footer outlet start */}
         <Route
-          isAuthenticated={isAuthenticated}
           path="/"
           element={
-            <PrivateRoute>
+            <PrivateRoute auth={isAuthenticated}>
               <LandingLayout />
             </PrivateRoute>
           }
         >
-          <Route
-            isAuthenticated={isAuthenticated}
-            path=""
-            element={<LandingMain />}
-          />
-          <Route
-            isAuthenticated={isAuthenticated}
-            path="/movies"
-            element={<AllMovies />}
-          />
-          <Route
-            isAuthenticated={isAuthenticated}
-            path="/profile"
-            element={<UserProfile />}
-          />
-          <Route
-            isAuthenticated={isAuthenticated}
-            path="/rating/:id"
-            element={<ViewMovieRating />}
-          />
-          <Route
-            isAuthenticated={isAuthenticated}
-            path="/feedback/:id"
-            element={<UserFeedback />}
-          />
-          {/* <Route  isAuthenticated={isAuthenticated} path="/feedback-submission" element={<FeedbackSubmission />} /> */}
-          <Route
-            isAuthenticated={isAuthenticated}
-            path="/settings"
-            element={<Setting />}
-          />
+          <Route path="" element={<LandingMain />} />
+          <Route path="/movies" element={<AllMovies />} />
+          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/rating/:id" element={<ViewMovieRating />} />
+          <Route path="/feedback/:id" element={<UserFeedback />} />
+          <Route path="/settings" element={<Setting />} />
         </Route>
         {/* navbar and footer outlet end */}
         {/* admin dashboard outlet start */}
         <Route
-          isAuthenticated={isAuthenticated}
           path="/admin/"
-          element={<AdminDashboard />}
+          element={
+            <PrivateRoute auth={isAuthenticated}>
+              <AdminDashboard />
+            </PrivateRoute>
+          }
         >
-          <Route
-            isAuthenticated={isAuthenticated}
-            path="/admin/approve-vendors/"
-            element={<ApproveVendors />}
-          />
-          <Route
-            isAuthenticated={isAuthenticated}
-            path="/admin/display-movies/"
-            element={<Movies />}
-          />
-          <Route
-            isAuthenticated={isAuthenticated}
-            path="/admin/display-users/"
-            element={<DisplayUser />}
-          />
-          <Route
-            isAuthenticated={isAuthenticated}
-            path="/admin/add-movie/"
-            element={<AddMovie />}
-          />
-          <Route
-            isAuthenticated={isAuthenticated}
-            path="/admin/category/"
-            element={<AddCategory />}
-          />
+          <Route path="/admin/approve-vendors/" element={<ApproveVendors />} />
+          <Route path="/admin/display-movies/" element={<Movies />} />
+          <Route path="/admin/display-users/" element={<DisplayUser />} />
+          <Route path="/admin/add-movie/" element={<AddMovie />} />
+          <Route path="/admin/category/" element={<AddCategory />} />
         </Route>
         {/* admin dashboard outlet end */}
-        <Route
-          isAuthenticated={isAuthenticated}
-          path="/send-otp"
-          element={<SendOTP />}
-        />
-        <Route
-          isAuthenticated={isAuthenticated}
-          path="/reset-password"
-          element={<ResetLostPassword />}
-        />
-        <Route
-          isAuthenticated={isAuthenticated}
-          path="/verify-otp"
-          element={<VerifyOTP />}
-        />
-        <Route
-          isAuthenticated={isAuthenticated}
-          path="/change-password"
-          element={<ChangePassword />}
-        />
+        <Route path="/send-otp" element={<SendOTP />} />
+        <Route path="/reset-password" element={<ResetLostPassword />} />
+        <Route path="/verify-otp" element={<VerifyOTP />} />
+        <Route path="/change-password" element={<ChangePassword />} />
       </Routes>
     </BrowserRouter>
   );

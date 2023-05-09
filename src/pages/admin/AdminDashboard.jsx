@@ -49,16 +49,7 @@ export default function AdminDashboard(props) {
             <ListItemText primary="Dashboard" />
           </ListItemButton>
         </ListItem> */}
-        <ListItem disablePadding>
-          <ListItemButton
-            onClick={(event) => navigate("/admin/approve-vendors")}
-          >
-            <ListItemIcon>
-              <PersonAdd />
-            </ListItemIcon>
-            <ListItemText primary="Approve Vendors" />
-          </ListItemButton>
-        </ListItem>
+
         <ListItem disablePadding>
           <ListItemButton
             onClick={(event) => navigate("/admin/display-movies")}
