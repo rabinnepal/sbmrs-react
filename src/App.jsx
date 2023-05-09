@@ -8,7 +8,6 @@ import VerifyOTP from "./pages/auth/VerifyOTP";
 import ChangePassword from "./pages/user/landing/ChangePassword";
 import ViewMovieRating from "./pages/user/feedback/ViewMovieRating";
 import UserFeedback from "./pages/user/feedback/UserFeedback";
-import FeedbackSubmission from "./pages/user/feedback/FeedbackSubmission";
 import LandingLayout from "./pages/user/landing/LandingLayout";
 import LandingMain from "./pages/user/landing/LandingMain";
 import Setting from "./pages/user/settings/Settings";
@@ -20,7 +19,6 @@ import DisplayUser from "./pages/admin/components/user/DisplayUser";
 import AddMovie from "./pages/admin/components/movies/AddMovie";
 import AllMovies from "./pages/user/movies/AllMovies";
 import UserProfile from "./pages/user/profile/UserProfile";
-import ErrorPage from "./pages/global/ErrorPage";
 import AuthController from "./pages/global/AuthController";
 
 function PrivateRoute({ children }) {
