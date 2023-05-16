@@ -24,8 +24,8 @@ const ViewMovieRating = () => {
     await axios
       .get(`${api.baseURL}user/view-movie/${id}`, configData)
       .then((res) => {
-        console.log(res.data);
         setMovies(res.data.movie);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -36,12 +36,10 @@ const ViewMovieRating = () => {
       getMovie();
     }
   }, []);
-  // const movie= movie[0].movie_id
 
   return (
     <Box>
       {movies?.map((movie) => {
-        console.log(movie, "das");
         return (
           <Box
             sx={{
@@ -49,24 +47,24 @@ const ViewMovieRating = () => {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              my: 2,
+              mt: 2,
             }}
           >
             <Typography
               variant="h6"
               sx={{ color: "#7987FF", fontWeight: "bold", fontSize: 26 }}
             >
-              {movie?.movie_title}
+              {movie.movie_id?.movie_title}
             </Typography>
             <Typography
               variant="body1"
               sx={{ fontWeight: 600, fontSize: 18, my: 2 }}
             >
-              {movie?.description}
+              {movie.movie_id?.description}
             </Typography>
             <img
-              src={movie?.image}
-              alt={movie?.movie_title}
+              src={movie.movie_id?.image}
+              alt={movie.movie_id?.movie_title}
               height={400}
               width={200}
             />
@@ -91,6 +89,30 @@ const ViewMovieRating = () => {
               <Button variant="contained">Add your comment</Button>
               <Box sx={{ height: "15vh" }} />
             </Link>
+            {/* <Box>
+              <Typography>User's Feedback</Typography>
+              {movie.score?.map((score) => {
+                return (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      width: 1000,
+                    }}
+                  >
+                    <Box>
+                      <Typography>username</Typography>
+                    </Box>
+                    <Box
+                      sx={{ display: "flex", justifyContent: "space-between" }}
+                    >
+                      <Typography>{score.rating}</Typography>
+                      <Typography>{score.review}</Typography>
+                    </Box>
+                  </Box>
+                );
+              })}
+            </Box> */}
           </Box>
         );
       })}
