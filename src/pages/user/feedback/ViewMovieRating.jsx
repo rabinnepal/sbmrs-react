@@ -76,7 +76,7 @@ const ViewMovieRating = () => {
               </Typography>
               <Rating
                 name="rating"
-                value={movie[0].totalRating}
+                value={movie.totalRating}
                 readOnly
                 sx={{ border: "ridge" }}
               />
