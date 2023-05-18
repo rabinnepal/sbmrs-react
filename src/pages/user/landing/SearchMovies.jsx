@@ -70,7 +70,7 @@ const SearchMovies = () => {
           />
         </Container>
         <Box>
-          {movies.length === 0 || q === "" ? null : (
+          {movies?.length === 0 || q === "" ? null : (
             <Typography sx={{ ml: 2, fontWeight: 600, fontSize: 20 }}>
               Results:
             </Typography>
