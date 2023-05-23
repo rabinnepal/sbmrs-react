@@ -34,8 +34,9 @@ function UserProfile() {
   const handleClose = () => setOpen(false);
   const api = new APIClass();
   const [profile, setProfile] = useState(null);
-  const [user, setUser] = useState();
+  const [user, setUser] = useState([]);
 
+  const [profilePicture, setProfilePicture] = useState(null);
   const token = localStorage.getItem("token");
 
   // display images etc
@@ -60,6 +61,34 @@ function UserProfile() {
   useEffect(() => {
     getProfile();
   }, []);
+
+  // change profile
+  const fetchData = async (e) => {
+    e.preventDefault();
+
+    let config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const formData = new FormData();
+    formData.append("image", profilePicture);
+    try {
+      let res = axios.post(
+        `${api.baseURL}user/update-profile`,
+        formData,
+        config
+      );
+
+      handleClose();
+      alert("success");
+      getProfile();
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
 
   return (
     <>
@@ -89,6 +118,31 @@ function UserProfile() {
               src={user?.profilePicture}
               onClick={handleOpen}
             />
+            <Modal open={open} onClose={handleClose}>
+              <Box
+                sx={style}
+                component="form"
+                encType="multi-part"
+                onSubmit={(e) => fetchData(e)}
+              >
+                <TextField
+                  type="file"
+                  variant="outlined"
+                  name="profilePicture"
+                  sx={{ my: 3 }}
+                  onChange={(e) => setProfilePicture(e.target.files[0])}
+                  required
+                />
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="success"
+                  sx={{ display: "block", px: 3, ml: 2, mb: 5 }}
+                >
+                  Upload
+                </Button>
+              </Box>
+            </Modal>
 
             <div style={{ color: "#000", marginTop: "30px" }}>
               <Box sx={{ display: "flex", gap: 2 }}>

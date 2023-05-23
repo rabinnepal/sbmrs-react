@@ -131,6 +131,20 @@ const ViewMovieRating = () => {
                           sx={{ border: "ridge" }}
                         />
                       </Box>
+                      <Box>
+                        <Typography>
+                          Sentiment Rating :{" "}
+                          {score.sentimentRating.slice(0, 8) === "Negative" ? (
+                            <span style={{ color: "red" }}>
+                              {score.sentimentRating}
+                            </span>
+                          ) : (
+                            <span style={{ color: "green" }}>
+                              {score.sentimentRating}
+                            </span>
+                          )}
+                        </Typography>
+                      </Box>
                       <Box sx={{ px: 2 }}>
                         <Typography sx={{ fontSize: 17 }}>
                           {score.review}

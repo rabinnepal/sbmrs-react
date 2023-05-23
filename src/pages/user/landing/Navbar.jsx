@@ -13,10 +13,15 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { APIClass } from "../../../APICaller/APICaller";
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [user, setUser] = React.useState([]);
+  const token = localStorage.getItem("token");
+  const api = new APIClass();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -32,6 +37,30 @@ function Navbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  // fetch profile
+
+  const getProfile = async (e) => {
+    const configData = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    console.log(token);
+    await axios
+      .post(`${api.baseURL}user/profile`, "", configData)
+      .then((res) => {
+        console.log(res);
+        setUser(res.data.userProfile);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  React.useEffect(() => {
+    getProfile();
+  }, []);
 
   const logout = () => {
     localStorage.clear();
@@ -140,10 +169,7 @@ function Navbar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar
-                  alt="Remy Sharp"
-                  src="https://mui.com/static/images/avatar/2.jpg"
-                />
+                <Avatar alt={user?.fullName} src={user?.profilePicture} />
               </IconButton>
             </Tooltip>
             <Menu
