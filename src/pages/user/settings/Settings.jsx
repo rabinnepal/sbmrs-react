@@ -49,12 +49,10 @@ function Setting() {
     <>
       <Box
         bgcolor="#grey"
-        sx={
-          {
-            //   height: "500px",
-            //   position: "relative",
-          }
-        }
+        sx={{
+          height: "500px",
+          // position: "relative",
+        }}
       >
         <Container>
           <Box
@@ -78,20 +76,22 @@ function Setting() {
                 borderWidth: "thick",
                 cursor: "pointer",
                 "&:hover": {
-                  opacity: 0.85,
+                  opacity: 0.9,
                 },
               }}
-              src="https://picsum.photos/300/300"
-              //   src={user?.image}
+              src={user?.profilePicture}
             />
           </Box>
           <Box sx={{ height: 100, mt: 4 }}>
             <div style={{ color: "#000", marginTop: "30px" }}>
               <Box sx={{ display: "flex", gap: 2 }}>
-                <Link>Change Password</Link>
+                <Link to="/about">About Us</Link>
               </Box>
               <Box sx={{ display: "flex", gap: 2 }}>
-                <Link>Change Username</Link>
+                <Link to="/terms"> Terms and Conditions</Link>
+              </Box>
+              <Box sx={{ display: "flex", gap: 2 }}>
+                <Link to="/privacy"> Privacy Policy</Link>
               </Box>
             </div>
           </Box>

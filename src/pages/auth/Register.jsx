@@ -19,6 +19,8 @@ const theme = createTheme();
 
 export default function Register() {
   const api = new APIClass();
+  const [password1, setPassword1] = React.useState("");
+  const [password2, setPassword2] = React.useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,29 +33,39 @@ export default function Register() {
       email: data.get("email"),
       password: data.get("password"),
     };
-    let password = data.get("password");
-    let repassword = data.get("reassword");
-    // if (password !== repassword) {
-    //   alert("Passwords don't match!");
-    //   return;
-    // }
+    if (
+      formData.email !== "" ||
+      formData.password !== "" ||
+      formData.fullName !== "" ||
+      formData.userName !== ""
+    ) {
+      try {
+        let res = await axios.post(
+          `${api.baseURL}user/register`,
+          formData,
+          api.configData
+        );
 
-    await axios
-      .post(`${api.baseURL}user/register`, formData, api.configData)
-      .then((res) => {
         console.log(res);
-        window.location.href = "/login";
-      })
-      .catch((err) => {
+        // window.location.href = "/login";
+      } catch (err) {
         console.log(err);
-      });
+      }
+    } else {
+      alert("Please enter all required fields");
+    }
   };
+  if (password1 !== password2) {
+    alert("Passwords don't match!");
+    return;
+  }
 
   return (
     <Box
+      className="background"
+      color="white"
       sx={{
         minHeight: "100vh",
-        // background: "red",
         zIndex: 11,
       }}
     >
@@ -85,10 +97,16 @@ export default function Register() {
           </Grid>
           <Grid item xs={8}>
             <TextField
+              sx={{ border: "1px solid white" }}
+              inputProps={{ style: { color: "white" } }}
               margin="normal"
               required
               size="small"
-              label="Enter your Username"
+              label={
+                <Typography sx={{ color: "white" }}>
+                  Enter your Username
+                </Typography>
+              }
               name="userName"
               autoFocus
             />
@@ -98,10 +116,16 @@ export default function Register() {
           </Grid>
           <Grid item xs={8}>
             <TextField
+              sx={{ border: "1px solid white" }}
+              inputProps={{ style: { color: "white" } }}
               margin="normal"
               required
               size="small"
-              label="Enter your full name "
+              label={
+                <Typography sx={{ color: "white" }}>
+                  Enter your full name
+                </Typography>
+              }
               name="fullName"
             />
           </Grid>
@@ -111,11 +135,17 @@ export default function Register() {
           </Grid>
           <Grid item xs={8}>
             <TextField
+              sx={{ border: "1px solid white" }}
+              inputProps={{ style: { color: "white" } }}
               margin="normal"
               required
               size="small"
               id="email"
-              label="Enter your Email Address"
+              label={
+                <Typography sx={{ color: "white" }}>
+                  Enter your Email Address
+                </Typography>
+              }
               name="email"
               autoComplete="email"
               autoFocus
@@ -126,12 +156,19 @@ export default function Register() {
           </Grid>
           <Grid item xs={8}>
             <TextField
+              sx={{ border: "1px solid white" }}
+              inputProps={{ style: { color: "white" } }}
               margin="normal"
               required
               type="password"
               size="small"
-              label="Enter your password"
+              label={
+                <Typography sx={{ color: "white" }}>
+                  Enter your password
+                </Typography>
+              }
               name="password"
+              onChange={(e) => setPassword1(e.target.value)}
             />
           </Grid>
           <Grid item xs={4}>
@@ -139,12 +176,19 @@ export default function Register() {
           </Grid>
           <Grid item xs={8}>
             <TextField
+              sx={{ border: "1px solid white" }}
+              inputProps={{ style: { color: "white" } }}
               margin="normal"
               required
               type="password"
               size="small"
-              label="Re-enter your password"
+              label={
+                <Typography sx={{ color: "white" }}>
+                  Re-enter your password
+                </Typography>
+              }
               name="repassword"
+              onChange={(e) => setPassword2(e.target.value)}
             />
           </Grid>
 
@@ -165,7 +209,8 @@ export default function Register() {
           }}
         >
           <Link to="/login" style={{ textDecoration: "none" }}>
-            Aleady signed up? Click here
+            Aleady signed up?{" "}
+            <span style={{ textDecoration: "underline" }}>Click here</span>
           </Link>
         </Box>
       </Box>

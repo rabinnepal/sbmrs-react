@@ -20,6 +20,9 @@ import AddMovie from "./pages/admin/components/movies/AddMovie";
 import AllMovies from "./pages/user/movies/AllMovies";
 import UserProfile from "./pages/user/profile/UserProfile";
 import AuthController from "./pages/global/AuthController";
+import AboutUs from "./pages/user/settings/AboutUs";
+import TermsAndConditions from "./pages/user/settings/TermsAndConditons";
+import PrivacyPolicy from "./pages/user/settings/PrivacyPolicy";
 
 function PrivateRoute({ children }) {
   const auth = AuthController();
@@ -50,6 +53,9 @@ function App() {
           <Route path="/rating/:id" element={<ViewMovieRating />} />
           <Route path="/feedback/:id" element={<UserFeedback />} />
           <Route path="/settings" element={<Setting />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/terms" element={<TermsAndConditions />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
         </Route>
         {/* navbar and footer outlet end */}
         {/* admin dashboard outlet start */}

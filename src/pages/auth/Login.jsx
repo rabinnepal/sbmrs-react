@@ -31,9 +31,14 @@ export default function Login({ setIsAuthenticated }) {
       userName: data.get("userName"),
       password: data.get("password"),
     };
-    await axios
-      .post(`${api.baseURL}user/login`, formData, api.configData)
-      .then((res) => {
+    if (formData.password !== "" || formData.userName !== "") {
+      try {
+        let res = await axios.post(
+          `${api.baseURL}user/login`,
+          formData,
+          api.configData
+        );
+
         console.log(res);
         if (res.data.success === true) {
           localStorage.setItem("token", res.data.token);
@@ -47,18 +52,24 @@ export default function Login({ setIsAuthenticated }) {
           } else {
             alert("error");
           }
+        } else {
+          alert("Invalid credentials");
         }
-      })
-      .catch((err) => {
+      } catch (err) {
         console.log(err);
-      });
+      }
+    } else {
+      alert("Please enter all required fields");
+    }
   };
 
   return (
     <Box
+      className="background"
+      color="white"
+      class
       sx={{
         minHeight: "100vh",
-        // background: "red",
         zIndex: 11,
       }}
     >
@@ -87,22 +98,26 @@ export default function Login({ setIsAuthenticated }) {
         >
           <Typography>Username:</Typography>
           <TextField
+            sx={{ border: "1px solid white" }}
+            inputProps={{ style: { color: "white" } }}
             margin="normal"
             required
             fullWidth
             size="small"
-            label="Username"
+            label={<Typography sx={{ color: "white" }}>Username</Typography>}
             name="userName"
             autoFocus
           />
           <Typography>Password:</Typography>
           <TextField
+            sx={{ border: "1px solid white" }}
+            inputProps={{ style: { color: "white" } }}
             margin="normal"
             required
             fullWidth
             size="small"
             name="password"
-            label="Password"
+            label={<Typography sx={{ color: "white" }}>Password</Typography>}
             type="password"
             id="password"
             autoComplete="current-password"

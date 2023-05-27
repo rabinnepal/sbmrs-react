@@ -39,7 +39,7 @@ function UserProfile() {
   const [profilePicture, setProfilePicture] = useState(null);
   const token = localStorage.getItem("token");
 
-  // display images etc
+  // get profile
   const getProfile = async (e) => {
     const configData = {
       headers: {
