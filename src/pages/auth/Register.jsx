@@ -55,10 +55,10 @@ export default function Register() {
       alert("Please enter all required fields");
     }
   };
-  if (password1 !== password2) {
-    alert("Passwords don't match!");
-    return;
-  }
+  // if (password1 !== password2) {
+  //   alert("Passwords don't match!");
+  //   return;
+  // }
 
   return (
     <Box
@@ -168,7 +168,7 @@ export default function Register() {
                 </Typography>
               }
               name="password"
-              onChange={(e) => setPassword1(e.target.value)}
+              // onChange={(e) => setPassword1(e.target.value)}
             />
           </Grid>
           <Grid item xs={4}>
@@ -188,7 +188,7 @@ export default function Register() {
                 </Typography>
               }
               name="repassword"
-              onChange={(e) => setPassword2(e.target.value)}
+              // onChange={(e) => setPassword2(e.target.value)}
             />
           </Grid>
 

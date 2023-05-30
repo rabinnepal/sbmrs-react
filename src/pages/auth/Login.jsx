@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 
 const theme = createTheme();
 
-export default function Login({ setIsAuthenticated }) {
+export default function Login() {
   const api = new APIClass();
 
   const handleSubmit = async (e) => {
@@ -58,8 +58,6 @@ export default function Login({ setIsAuthenticated }) {
       } catch (err) {
         console.log(err);
       }
-    } else {
-      alert("Please enter all required fields");
     }
   };
 
@@ -67,7 +65,6 @@ export default function Login({ setIsAuthenticated }) {
     <Box
       className="background"
       color="white"
-      class
       sx={{
         minHeight: "100vh",
         zIndex: 11,
@@ -83,7 +80,6 @@ export default function Login({ setIsAuthenticated }) {
       {/* <CssBaseline /> */}
       <Box
         sx={{
-          marginTop: 4,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",

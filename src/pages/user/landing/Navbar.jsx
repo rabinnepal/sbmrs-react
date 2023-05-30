@@ -46,11 +46,9 @@ function Navbar() {
         Authorization: `Bearer ${token}`,
       },
     };
-    console.log(token);
     await axios
       .post(`${api.baseURL}user/profile`, "", configData)
       .then((res) => {
-        console.log(res);
         setUser(res.data.userProfile);
       })
       .catch((err) => {
@@ -118,14 +116,10 @@ function Navbar() {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
-                <Link to="/" textAlign="center">
-                  Home
-                </Link>
+                <Link to="/">Home</Link>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Link to="/movies" textAlign="center">
-                  Movies
-                </Link>
+                <Link to="/movies">Movies</Link>
               </MenuItem>
             </Menu>
           </Box>
@@ -189,14 +183,10 @@ function Navbar() {
               onClose={handleCloseUserMenu}
             >
               <MenuItem onClick={handleCloseUserMenu}>
-                <Link to="/profile" textAlign="center">
-                  Profile
-                </Link>
+                <Link to="/profile">Profile</Link>
               </MenuItem>
               <MenuItem onClick={handleCloseUserMenu}>
-                <Link to="/settings" textAlign="center">
-                  Settings
-                </Link>
+                <Link to="/settings">Settings</Link>
               </MenuItem>
               <MenuItem onClick={handleCloseUserMenu}>
                 <Link
@@ -208,7 +198,7 @@ function Navbar() {
                   }}
                   onClick={logout}
                 >
-                  <Typography textAlign="center">Log Out</Typography>
+                  <Typography>Log Out</Typography>
                 </Link>
               </MenuItem>
             </Menu>

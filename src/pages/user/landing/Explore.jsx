@@ -26,7 +26,6 @@ const Explore = () => {
       },
     };
     const res = await axios.get(`${api.baseURL}user/view-movies/`, configToken);
-    console.log(res.data);
     setMovies(res.data.movies);
   }, []);
 

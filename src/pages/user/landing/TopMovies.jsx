@@ -29,11 +29,7 @@ const TopMovies = () => {
       `${api.baseURL}user/get-toprated-movies/`,
       configToken
     );
-    console.log(res.data);
     setMovies(res.data.movies);
-    // for (let index = 0; index < res.data.movies.length; index++) {
-    //   let rating = res.data.movies[index].score;
-    // }
   }, []);
 
   useEffect(() => {

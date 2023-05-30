@@ -119,14 +119,14 @@ const TermsAndConditions = () => {
 
           <Typography variant="body1">
             These terms and conditions shall be governed by and construed in
-            accordance with the laws of [Your Country/State]. Any legal disputes
+            accordance with the laws of Sydney, Australia. Any legal disputes
             arising out of or in connection with these terms shall be subject to
-            the exclusive jurisdiction of the courts in [Your Country/State].
+            the exclusive jurisdiction of the courts in Sydney, Australia.
           </Typography>
 
           <Typography variant="body1">
             If you have any questions or concerns regarding these terms and
-            conditions, please contact us at [Contact Email].
+            conditions, please contact us at contact@sbmrs.com.
           </Typography>
         </Box>
       </Box>

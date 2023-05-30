@@ -29,14 +29,12 @@ const NewReleased = () => {
       `${api.baseURL}user/get-newlyreleased-movies/`,
       configToken
     );
-    console.log(res.data);
     setMovies(res.data.movies);
   }, []);
 
   useEffect(() => {
     getMovies();
   }, [getMovies]);
-  console.log(movies);
 
   return (
     <div>
@@ -77,6 +75,7 @@ const NewReleased = () => {
             .slice(0, 10)
             .reverse()
             ?.map((movie, index) => {
+              // console.log(movie);
               return (
                 <SwiperSlide key={index}>
                   <Box sx={{ p: 2 }}>

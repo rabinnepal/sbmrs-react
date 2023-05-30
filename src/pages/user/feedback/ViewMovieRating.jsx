@@ -43,7 +43,8 @@ const ViewMovieRating = () => {
     if (id) {
       getMovie();
     }
-  }, []);
+  }, [getMovie]);
+  console.log(movies);
 
   return (
     <Box>

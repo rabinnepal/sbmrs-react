@@ -96,7 +96,7 @@ const PrivacyPolicy = () => {
           </Typography>
           <Typography variant="body1">
             If you have any questions or concerns regarding our privacy policy,
-            please contact us at [Contact Email].
+            please contact us at contact@sbmrs.com.
           </Typography>
         </Box>
       </Box>

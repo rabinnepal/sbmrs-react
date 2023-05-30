@@ -49,7 +49,6 @@ const ViewSingleMovieModal = ({ id }) => {
     await axios
       .get(`${api.baseURL}admin/view-movie/${id}`, configToken)
       .then((res) => {
-        console.log(res, "fsadssda");
         setMovies(res.data.movie);
       });
   }, []);

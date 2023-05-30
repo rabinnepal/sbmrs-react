@@ -104,8 +104,8 @@ const AboutUs = () => {
           <Typography variant="h6" fontWeight="bold">
             SBMRS Inc.
           </Typography>
-          <Typography>Itahari 1</Typography>
-          <Typography>Nepal</Typography>
+          <Typography>Sydney</Typography>
+          <Typography>Australia</Typography>
           <Typography>Reg no. 2345-2312432-12</Typography>
           <Typography>contact@sbmrs.com</Typography>
         </Box>

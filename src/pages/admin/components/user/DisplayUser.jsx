@@ -27,13 +27,13 @@ import { APIClass } from "../../../../APICaller/APICaller";
 const drawerWidth = 240;
 export default function DisplayUser() {
   const [users, setUsers] = useState([]);
-  const [deleted, setDeleted] = useState([]);
+  const [deleted, setDeleted] = useState(false);
 
   const api = new APIClass();
   const token = `Bearer ${localStorage.getItem("token")}`;
 
   // // display  all banners
-  const getMovies = useCallback(async (e) => {
+  const getUsers = useCallback(async (e) => {
     const configToken = {
       headers: {
         Authorization: token,
@@ -49,8 +49,8 @@ export default function DisplayUser() {
   }, []);
 
   useEffect(() => {
-    getMovies();
-  }, [getMovies]);
+    getUsers();
+  }, [getUsers]);
 
   // delete artist
 
@@ -61,14 +61,14 @@ export default function DisplayUser() {
       },
     };
     const data = {
-      movie_id: id,
+      id: id,
     };
     await axios
-      .post(`${api.baseURL}admin/delete-movie/`, data, configToken)
+      .post(`${api.baseURL}admin/delete-user/`, data, configToken)
       .then(() => {
         setDeleted(true);
         alert("Deleted Successfully!!");
-        getMovies();
+        getUsers();
       })
       .catch((error) => {
         console.log(error);
@@ -93,11 +93,11 @@ export default function DisplayUser() {
             <TableHead>
               <TableRow sx={{ bgcolor: "lightblue" }}>
                 <TableCell>Username</TableCell>
-                <TableCell align="right">Profile</TableCell>
+                <TableCell align="center">Profile</TableCell>
                 <TableCell align="right">Fullname</TableCell>
                 <TableCell align="right">Email</TableCell>
                 <TableCell align="right">Role</TableCell>
-                {/* <TableCell align="right">Action</TableCell> */}
+                <TableCell align="right">Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -120,6 +120,16 @@ export default function DisplayUser() {
                   <TableCell align="right">{user.fullName}</TableCell>
                   <TableCell align="right">{user.email}</TableCell>
                   <TableCell align="right">{user.role}</TableCell>
+                  <TableCell align="right">
+                    <Button
+                      color="error"
+                      onClick={() => {
+                        handleDelete(user._id);
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

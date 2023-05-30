@@ -42,7 +42,6 @@ const SearchMovies = () => {
         formData,
         configToken
       );
-      console.log(res);
       setMovies(res.data.results);
     },
     [q]

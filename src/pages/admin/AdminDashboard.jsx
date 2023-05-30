@@ -19,6 +19,8 @@ import {
   Add,
   Dashboard,
   ExitToApp,
+  Group,
+  Person,
   PersonAdd,
   ViewCarousel,
 } from "@mui/icons-material";
@@ -63,7 +65,7 @@ export default function AdminDashboard(props) {
         <ListItem disablePadding>
           <ListItemButton onClick={(event) => navigate("/admin/display-users")}>
             <ListItemIcon>
-              <ViewCarousel />
+              <Group />
             </ListItemIcon>
             <ListItemText primary="Users" />
           </ListItemButton>
