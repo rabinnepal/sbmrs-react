@@ -41,7 +41,7 @@ export default function Movies() {
   const token = `Bearer ${localStorage.getItem("token")}`;
 
   // // display  all movies
-  const getMovies = useCallback(async (e) => {
+  const getMovies = useCallback(async () => {
     const configToken = {
       headers: {
         Authorization: token,

@@ -53,7 +53,7 @@ export default function Login() {
             alert("error");
           }
         } else {
-          alert("Invalid credentials");
+          alert(res.data.message);
         }
       } catch (err) {
         console.log(err);

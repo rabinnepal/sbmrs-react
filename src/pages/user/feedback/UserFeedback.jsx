@@ -58,6 +58,7 @@ const UserFeedback = () => {
     await axios
       .post(`${api.baseURL}user/add-comments`, formData, configData)
       .then((res) => {
+        console.log(res);
         if (res.data.success === true) {
           console.log(res);
           setMessage(res.data.commentAndReview);

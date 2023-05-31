@@ -45,9 +45,14 @@ export default function Register() {
           formData,
           api.configData
         );
+        if (res.data.success === true) {
+          console.log(res);
+          alert(res.data.message);
 
-        console.log(res);
-        // window.location.href = "/login";
+          window.location.href = "/login";
+        } else {
+          alert(res.data.message);
+        }
       } catch (err) {
         console.log(err);
       }
