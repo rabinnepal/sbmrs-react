@@ -50,6 +50,7 @@ const ViewMovieRating = () => {
     <>
       {Array.isArray(movies) === true ? (
         <Box>
+          className="back"
           {movies?.map((movie) => {
             return (
               <>
@@ -168,19 +169,20 @@ const ViewMovieRating = () => {
           })}
         </Box>
       ) : (
-        <Box>
+        <Box className="back">
           <Box
             sx={{
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              mt: 2,
+              pt: 2,
+              color: "white",
             }}
           >
             <Typography
               variant="h6"
-              sx={{ color: "#7987FF", fontWeight: "bold", fontSize: 26 }}
+              sx={{ color: "white", fontWeight: "bold", fontSize: 26 }}
             >
               {movies?.movie_title}
             </Typography>

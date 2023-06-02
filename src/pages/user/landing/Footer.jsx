@@ -7,9 +7,9 @@ import { Link } from "react-router-dom";
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="black">
+    <Typography variant="body2" color="white">
       {"Copyright © "}
-      <Link href="/" style={{ color: "black", textDecoration: "none" }}>
+      <Link href="/" style={{ color: "white", textDecoration: "none" }}>
         SBMRS
       </Link>
       <span> </span>
@@ -29,6 +29,8 @@ export default function Footer() {
         backgroundColor: "#FFF",
         boxShadow: 20,
         bottom: 0,
+        background: "#252933",
+        color: "white",
       }}
     >
       <Container>
@@ -39,7 +41,7 @@ export default function Footer() {
           sx={{ mb: 3 }}
         >
           <Grid item xs={4}>
-            <Link to="/" style={{ color: "black", textDecoration: "none" }}>
+            <Link to="/" style={{ textDecoration: "none", color: "white" }}>
               Home
             </Link>
           </Grid>
@@ -47,7 +49,7 @@ export default function Footer() {
           <Grid item xs={4}>
             <Link
               to="/profile"
-              style={{ color: "black", textDecoration: "none" }}
+              style={{ textDecoration: "none", color: "white" }}
             >
               Profile
             </Link>
@@ -55,7 +57,7 @@ export default function Footer() {
           <Grid item xs={4}>
             <Link
               to="/settings"
-              style={{ color: "black", textDecoration: "none" }}
+              style={{ textDecoration: "none", color: "white" }}
             >
               Settings
             </Link>

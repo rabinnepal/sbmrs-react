@@ -68,60 +68,112 @@ const ViewSingleMovieModal = ({ id }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box
-          //   sx={{
-          //     display: "flex",
-          //     flexDirection: "column",
-          //     justifyContent: "center",
-          //     alignItems: "center",
-          //     my: 3,
-          //   }}
-          sx={style}
-        >
-          {movies?.map((movie) => {
-            console.log(movie, "das");
-            return (
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
+        {Array.isArray(movies) === true ? (
+          <Box
+            //   sx={{
+            //     display: "flex",
+            //     flexDirection: "column",
+            //     justifyContent: "center",
+            //     alignItems: "center",
+            //     my: 3,
+            //   }}
+            sx={style}
+          >
+            {movies?.map((movie) => {
+              console.log(movie, "das");
+              return (
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography
+                    variant="h6"
+                    sx={{ color: "#7987FF", fontWeight: "bold", fontSize: 26 }}
+                  >
+                    {movie?.movie_id.movie_title}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={{ fontWeight: 600, fontSize: 18, mb: 2 }}
+                  >
+                    Description:{movie?.movie_id.description}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={{ fontWeight: 600, fontSize: 18, mb: 2 }}
+                  >
+                    Release Date:{movie?.movie_id.release_date}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={{ fontWeight: 600, fontSize: 18, mb: 2 }}
+                  >
+                    {/* Category:{movie?.categories[0].category} */}
+                  </Typography>
+                  <img
+                    src={movie?.movie_id.image}
+                    alt={movie?.movie_id.movie_title}
+                    height={400}
+                    width={200}
+                  />
+                </Box>
+              );
+            })}
+          </Box>
+        ) : (
+          <Box
+            //   sx={{
+            //     display: "flex",
+            //     flexDirection: "column",
+            //     justifyContent: "center",
+            //     alignItems: "center",
+            //     my: 3,
+            //   }}
+            sx={style}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Typography
+                variant="h6"
+                sx={{ color: "#7987FF", fontWeight: "bold", fontSize: 26 }}
               >
-                <Typography
-                  variant="h6"
-                  sx={{ color: "#7987FF", fontWeight: "bold", fontSize: 26 }}
-                >
-                  {movie?.movie_id.movie_title}
-                </Typography>
-                <Typography
-                  variant="body1"
-                  sx={{ fontWeight: 600, fontSize: 18, mb: 2 }}
-                >
-                  Description:{movie?.movie_id.description}
-                </Typography>
-                <Typography
-                  variant="body1"
-                  sx={{ fontWeight: 600, fontSize: 18, mb: 2 }}
-                >
-                  Release Date:{movie?.movie_id.release_date}
-                </Typography>
-                <Typography
-                  variant="body1"
-                  sx={{ fontWeight: 600, fontSize: 18, mb: 2 }}
-                >
-                  {/* Category:{movie?.categories[0].category} */}
-                </Typography>
-                <img
-                  src={movie?.movie_id.image}
-                  alt={movie?.movie_id.movie_title}
-                  height={400}
-                  width={200}
-                />
-              </Box>
-            );
-          })}
-        </Box>
+                {movies?.movie_title}
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{ fontWeight: 600, fontSize: 18, mb: 2 }}
+              >
+                Description:{movies?.description}
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{ fontWeight: 600, fontSize: 18, mb: 2 }}
+              >
+                Release Date:{movies?.release_date}
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{ fontWeight: 600, fontSize: 18, mb: 2 }}
+              >
+                {/* Category:{movie?.categories[0].category} */}
+              </Typography>
+              <img
+                src={movies?.image}
+                alt={movies?.movie_title}
+                height={400}
+                width={200}
+              />
+            </Box>
+          </Box>
+        )}
       </Modal>
     </ThemeProvider>
   );

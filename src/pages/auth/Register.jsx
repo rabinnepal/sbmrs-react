@@ -21,6 +21,7 @@ export default function Register() {
   const api = new APIClass();
   const [password1, setPassword1] = React.useState("");
   const [password2, setPassword2] = React.useState("");
+  const [passwordError, setPasswordError] = React.useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,6 +34,15 @@ export default function Register() {
       email: data.get("email"),
       password: data.get("password"),
     };
+    if (password1 !== password2) {
+      alert("Passwords don't match!");
+      return;
+    }
+    if (passwordError === true) {
+      alert("Password must contain symbols and numbers.");
+      return;
+    }
+
     if (
       formData.email !== "" ||
       formData.password !== "" ||
@@ -60,10 +70,19 @@ export default function Register() {
       alert("Please enter all required fields");
     }
   };
-  // if (password1 !== password2) {
-  //   alert("Passwords don't match!");
-  //   return;
-  // }
+
+  const handlePasswordChange = (e) => {
+    const password = e.target.value;
+    setPassword1(password);
+
+    const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const isComplex = hasSymbol && hasNumber;
+    console.log(isComplex);
+
+    setPasswordError(!isComplex);
+  };
+  console.log(passwordError, "error");
 
   return (
     <Box
@@ -80,8 +99,7 @@ export default function Register() {
       >
         Sentiment Based Movie Rating System
       </Typography>
-      {/* <Container component="main" maxWidth="sm"> */}
-      {/* <CssBaseline /> */}
+
       <Box
         sx={{
           display: "flex",
@@ -173,7 +191,10 @@ export default function Register() {
                 </Typography>
               }
               name="password"
-              // onChange={(e) => setPassword1(e.target.value)}
+              onChange={(e) => {
+                setPassword1(e.target.value);
+                handlePasswordChange(e);
+              }}
             />
           </Grid>
           <Grid item xs={4}>
@@ -193,7 +214,7 @@ export default function Register() {
                 </Typography>
               }
               name="repassword"
-              // onChange={(e) => setPassword2(e.target.value)}
+              onChange={(e) => setPassword2(e.target.value)}
             />
           </Grid>
 
@@ -219,7 +240,6 @@ export default function Register() {
           </Link>
         </Box>
       </Box>
-      {/* </Container> */}
     </Box>
   );
 }

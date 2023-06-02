@@ -56,12 +56,14 @@ const SearchMovies = () => {
       <Container>
         <Container sx={{ textAlign: "center", my: 2 }}>
           <TextField
+            sx={{ border: "1px solid white" }}
+            inputProps={{ style: { color: "white" } }}
             placeholder="Search"
             fullWidth
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <Search />
+                  <Search color="warning" />
                 </InputAdornment>
               ),
             }}

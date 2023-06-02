@@ -13,7 +13,13 @@ import NewReleased from "./NewReleased";
 const LandingMain = () => {
   return (
     <div
-      style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+      className="back"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+        color: "white",
+      }}
     >
       <Banner />
       <SearchMovies />

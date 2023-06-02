@@ -46,7 +46,7 @@ export default function DisplayUser() {
     );
     console.log(res.data);
     setUsers(res.data.users);
-  });
+  }, []);
 
   useEffect(() => {
     getUsers();

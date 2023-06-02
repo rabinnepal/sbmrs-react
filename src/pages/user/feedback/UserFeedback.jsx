@@ -74,29 +74,26 @@ const UserFeedback = () => {
 
   return (
     <Box
+      className="back"
       sx={{
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        my: 3,
+        py: 3,
+        color: "white",
       }}
     >
       <Typography
         variant="h6"
-        sx={{ color: "#7987FF", fontWeight: "bold", fontSize: 26 }}
+        sx={{ color: "white", fontWeight: "bold", fontSize: 26 }}
       >
         {movie?.movie_title}
       </Typography>
       <Typography variant="body1" sx={{ fontWeight: 600, fontSize: 18, mb: 2 }}>
         {movie?.description}
       </Typography>
-      <img
-        src={movie?.image}
-        alt={movie?.movie_title}
-        height={400}
-        width={200}
-      />
+      <img src={movie?.image} alt={movie?.movie_title} width={400} />
       <Box
         component="form"
         onSubmit={addComment}
@@ -117,13 +114,14 @@ const UserFeedback = () => {
           }}
         />
         <TextField
+          sx={{ border: "1px solid white", width: 500 }}
+          inputProps={{ style: { color: "black" } }}
           name="message"
           multiline
           rows={4}
           type="text"
           fullWidth
           placeholder="Write your comment here"
-          sx={{ width: 500 }}
         />
         <Button
           variant="contained"
