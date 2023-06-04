@@ -24,6 +24,7 @@ export default function Category() {
   const [deleted, setDeleted] = useState([]);
 
   const token = `Bearer ${localStorage.getItem("token")}`;
+  const id = localStorage.getItem("id");
   const api = new APIClass();
 
   // // display  all categories
@@ -38,7 +39,6 @@ export default function Category() {
         `${api.baseURL}admin/list-category/`,
         configToken
       );
-      console.log(res.data);
       setCategories(res.data.categories);
     } catch (err) {
       console.log(err);
@@ -50,15 +50,20 @@ export default function Category() {
   }, [getCategories]);
 
   // delete categories
-  const handleDelete = async (id) => {
-    const config = {
+  const handleDelete = async (category_id) => {
+    const configToken = {
       headers: {
         Authorization: token,
       },
     };
+    const data = {
+      category_id: category_id,
+      id: id,
+    };
     await axios
-      .post(`${api.baseURL}admin/remove-category/`, config, id)
+      .post(`${api.baseURL}admin/remove-category/`, data, configToken)
       .then((response) => {
+        console.log(response);
         setDeleted(true);
         getCategories();
       })

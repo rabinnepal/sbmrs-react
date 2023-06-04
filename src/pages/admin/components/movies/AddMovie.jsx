@@ -2,14 +2,73 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Button, TextField } from "@mui/material";
+import { Autocomplete, Button, OutlinedInput, TextField } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import Chip from "@mui/material/Chip";
+
 import { useState } from "react";
 import axios from "axios";
 import { APIClass } from "../../../../APICaller/APICaller";
 
 const drawerWidth = 240;
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+function getStyles(name, personName, theme) {
+  return {
+    fontWeight:
+      personName.indexOf(name) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
+  };
+}
 export default function AddMovie() {
   const api = new APIClass();
+  const token = `Bearer ${localStorage.getItem("token")}`;
+
+  const theme = useTheme();
+  const [categories, setCategories] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+
+  const handleCategoryChange = (event, value) => {
+    setSelectedCategories(value.map((item) => item._id));
+  };
+
+  const getOptionLabel = (option) => option.category;
+
+  const isOptionEqualToValue = (option, value) => option._id === value;
+  console.log(selectedCategories);
+
+  // // display  all categories
+  const getCategories = React.useCallback(async (e) => {
+    const configToken = {
+      headers: {
+        Authorization: token,
+      },
+    };
+    try {
+      let res = await axios.get(
+        `${api.baseURL}admin/list-category/`,
+        configToken
+      );
+      setCategories(res.data.categories);
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
 
   // add banner
 
@@ -49,6 +108,10 @@ export default function AddMovie() {
       });
   };
 
+  React.useEffect(() => {
+    getCategories();
+  }, [getCategories]);
+
   return (
     <Box
       sx={{
@@ -85,14 +148,24 @@ export default function AddMovie() {
           sx={{ my: 2 }}
           required
         />
-        <TextField
-          variant="outlined"
-          name="category"
-          width="100%"
-          label="Add movie category"
-          fullWidth
-          sx={{ my: 2 }}
-          required
+
+        <Autocomplete
+          multiple
+          options={categories}
+          getOptionLabel={getOptionLabel}
+          value={categories.filter((category) =>
+            selectedCategories.includes(category._id)
+          )}
+          onChange={handleCategoryChange}
+          isOptionEqualToValue={isOptionEqualToValue}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              variant="outlined"
+              label="Categories"
+              placeholder="Select categories"
+            />
+          )}
         />
 
         <Typography fontWeight="600">Add movie release date</Typography>

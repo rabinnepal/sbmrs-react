@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import {
   Box,
@@ -40,7 +40,7 @@ function UserProfile() {
   const token = localStorage.getItem("token");
 
   // get profile
-  const getProfile = async (e) => {
+  const getProfile = useCallback(async (e) => {
     const configData = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -56,11 +56,11 @@ function UserProfile() {
       .catch((err) => {
         console.log(err);
       });
-  };
+  }, []);
 
   useEffect(() => {
     getProfile();
-  }, []);
+  }, [getProfile]);
 
   // change profile
   const fetchData = async (e) => {

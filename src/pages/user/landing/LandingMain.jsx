@@ -1,9 +1,5 @@
 import React from "react";
-import NowPlaying from "./NowPlaying";
-import ComingSoon from "./ComingSoon";
 import TopMovies from "./TopMovies";
-import { Box, Container, InputAdornment, TextField } from "@mui/material";
-import { Search } from "@mui/icons-material";
 import NewMovies from "./NewMovies";
 import Banner from "./Banner";
 import Explore from "./Explore";

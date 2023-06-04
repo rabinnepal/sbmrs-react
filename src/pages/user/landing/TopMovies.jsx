@@ -4,7 +4,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
-import { Box, Container, Typography } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Container,
+  Typography,
+} from "@mui/material";
 import { Navigation } from "swiper";
 import axios from "axios";
 import { APIClass } from "../../../APICaller/APICaller";
@@ -45,29 +52,28 @@ const TopMovies = () => {
         <Swiper
           navigation={true}
           modules={[Navigation]}
-          spaceBetween={50}
-          slidesPerView={5}
+          spaceBetween={60}
+          slidesPerView={4}
           scrollbar={{ draggable: false }}
           breakpoints={{
             320: {
-              slidesPerView: 2,
-              spaceBetween: 20,
+              slidesPerView: 1,
             },
             480: {
-              slidesPerView: 3,
-              spaceBetween: 30,
-            },
-            640: {
-              slidesPerView: 4,
-              spaceBetween: 20,
-            },
-            768: {
-              slidesPerView: 5,
+              slidesPerView: 2,
               spaceBetween: 40,
             },
+            640: {
+              slidesPerView: 3,
+              spaceBetween: 60,
+            },
+            768: {
+              slidesPerView: 4,
+              spaceBetween: 80,
+            },
             1024: {
-              slidesPerView: 5,
-              spaceBetween: 50,
+              slidesPerView: 4,
+              spaceBetween: 60,
             },
           }}
         >
@@ -77,15 +83,20 @@ const TopMovies = () => {
                 {() => {
                   if (movie?.score[0].rating >= 4)
                     return (
-                      <Box sx={{ p: 2 }}>
-                        <img
-                          src={movie.movie_id?.image}
-                          alt={movie.movie_id?.movie_title}
-                          style={{ borderRadius: 20, height: 200 }}
-                          onClick={(e) =>
-                            navigate(`/rating/${movie.movie_id._id}`)
-                          }
-                        />
+                      <Box sx={{ p: 2, borderRadius: 20 }}>
+                        <Card onClick={(e) => navigate(`/rating/${movie._id}`)}>
+                          <CardMedia
+                            image={movie.movie_id.image}
+                            alt={movie.movie_id.movie_title}
+                            style={{ height: 200 }}
+                          />
+
+                          <CardContent>
+                            <Typography sx={{ fontSize: 18, color: "blue" }}>
+                              {movie.movie_id.movie_title}
+                            </Typography>
+                          </CardContent>
+                        </Card>
                       </Box>
                     );
                   else {

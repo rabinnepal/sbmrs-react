@@ -76,7 +76,13 @@ const Explore = () => {
                 <SwiperSlide key={index}>
                   <Card
                     raised={false}
-                    sx={{ p: 2, width: 320, boxShadow: 1, mb: 4 }}
+                    sx={{
+                      p: 2,
+                      width: 320,
+                      boxShadow: 1,
+                      mb: 4,
+                      bgcolor: "#252933",
+                    }}
                   >
                     <img
                       src={movie.image}
@@ -85,10 +91,12 @@ const Explore = () => {
                       onClick={(e) => navigate(`/rating/${movie._id}`)}
                     />
                     <Box sx={{ ml: 1, mt: 1 }}>
-                      <Typography sx={{ fontSize: 20, color: "blue" }}>
+                      <Typography sx={{ fontSize: 20, color: "white" }}>
                         {movie.movie_title}
                       </Typography>
-                      <Typography>{movie.categories[0].category}</Typography>
+                      <Typography sx={{ color: "white" }}>
+                        {movie.categories[0].category}
+                      </Typography>
                     </Box>
                   </Card>
                 </SwiperSlide>

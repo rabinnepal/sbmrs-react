@@ -6,6 +6,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import {
   Box,
+  Card,
+  CardContent,
+  CardMedia,
   Container,
   Grid,
   InputAdornment,
@@ -57,16 +60,18 @@ const AllMovies = () => {
   console.log(movies);
 
   return (
-    <div>
+    <Box className="background-image" sx={{ width: "100%", color: "white" }}>
       <Container>
-        <Container sx={{ textAlign: "center", my: 2 }}>
+        <Container sx={{ textAlign: "center", py: 2 }}>
           <TextField
+            sx={{ border: "1px solid white" }}
+            inputProps={{ style: { color: "white" } }}
             placeholder="Search"
             fullWidth
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <Search />
+                  <Search color="warning" />
                 </InputAdornment>
               ),
             }}
@@ -82,13 +87,20 @@ const AllMovies = () => {
             {movies?.map((movie, index) => {
               return (
                 <Grid xs={4} item key={index}>
-                  <Box sx={{ p: 2 }}>
-                    <img
-                      src={movie.image}
-                      alt={movie.movie_title}
-                      style={{ borderRadius: 20, height: 200 }}
-                      onClick={(e) => navigate(`/rating/${movie._id}`)}
-                    />
+                  <Box sx={{ p: 2, borderRadius: 20 }}>
+                    <Card onClick={(e) => navigate(`/rating/${movie._id}`)}>
+                      <CardMedia
+                        image={movie.image}
+                        alt={movie.movie_title}
+                        style={{ height: 300 }}
+                      />
+
+                      <CardContent>
+                        <Typography sx={{ fontSize: 18, color: "blue" }}>
+                          {movie.movie_title}
+                        </Typography>
+                      </CardContent>
+                    </Card>
                   </Box>
                 </Grid>
               );
@@ -97,7 +109,7 @@ const AllMovies = () => {
           </Grid>
         )}
       </Container>
-    </div>
+    </Box>
   );
 };
 
