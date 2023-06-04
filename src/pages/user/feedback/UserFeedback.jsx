@@ -1,4 +1,11 @@
-import { Box, Button, Rating, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Rating,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
 import { APIClass } from "../../../APICaller/APICaller";
 import axios from "axios";
@@ -74,7 +81,7 @@ const UserFeedback = () => {
 
   return (
     <Box
-      className="back"
+      className="background-image"
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -84,53 +91,65 @@ const UserFeedback = () => {
         color: "white",
       }}
     >
-      <Typography
-        variant="h6"
-        sx={{ color: "white", fontWeight: "bold", fontSize: 26 }}
-      >
-        {movie?.movie_title}
-      </Typography>
-      <Typography variant="body1" sx={{ fontWeight: 600, fontSize: 18, mb: 2 }}>
-        {movie?.description}
-      </Typography>
-      <img src={movie?.image} alt={movie?.movie_title} width={400} />
-      <Box
-        component="form"
-        onSubmit={addComment}
+      <Container
         sx={{
-          my: 4,
           display: "flex",
           flexDirection: "column",
+          justifyContent: "center",
           alignItems: "center",
-          gap: 3,
         }}
       >
-        <Rating
-          name="rating"
-          size="large"
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-        />
-        <TextField
-          sx={{ border: "1px solid white", width: 500 }}
-          inputProps={{ style: { color: "black" } }}
-          name="message"
-          multiline
-          rows={4}
-          type="text"
-          fullWidth
-          placeholder="Write your comment here"
-        />
-        <Button
-          variant="contained"
-          type="submit"
-          onSubmit={() => navigate(`/feedback-submission`)}
+        <Typography
+          variant="h6"
+          sx={{ color: "white", fontWeight: "bold", fontSize: 26 }}
         >
-          Submit
-        </Button>
-      </Box>
+          {movie?.movie_title}
+        </Typography>
+        <Typography
+          variant="body1"
+          sx={{ fontWeight: 600, fontSize: 18, mb: 2 }}
+        >
+          {movie?.description}
+        </Typography>
+        <img src={movie?.image} alt={movie?.movie_title} width={400} />
+        <Box
+          component="form"
+          onSubmit={addComment}
+          sx={{
+            my: 4,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 3,
+          }}
+        >
+          <Rating
+            name="rating"
+            size="large"
+            value={value}
+            onChange={(event, newValue) => {
+              setValue(newValue);
+            }}
+          />
+          <TextField
+            sx={{ border: "1px solid white", width: 500 }}
+            inputProps={{ style: { color: "white" } }}
+            name="message"
+            multiline
+            rows={4}
+            type="text"
+            fullWidth
+            placeholder="Write your comment here"
+          />
+          <Button
+            variant="contained"
+            type="submit"
+            onSubmit={() => navigate(`/feedback-submission`)}
+          >
+            Submit
+          </Button>
+        </Box>
+      </Container>
     </Box>
   );
 };

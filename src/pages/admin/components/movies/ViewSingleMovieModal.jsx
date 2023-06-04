@@ -31,7 +31,7 @@ const style = {
   p: 4,
 };
 
-const ViewSingleMovieModal = ({ id }) => {
+const ViewSingleMovieModal = ({ id, movie }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -139,6 +139,8 @@ const ViewSingleMovieModal = ({ id }) => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                height: "90vh",
+                overflow: "scroll",
               }}
             >
               <Typography
@@ -151,13 +153,15 @@ const ViewSingleMovieModal = ({ id }) => {
                 variant="body1"
                 sx={{ fontWeight: 600, fontSize: 18, mb: 2 }}
               >
-                Description:{movies?.description}
+                <span style={{ color: "grey" }}>Description : </span>
+                {movies?.description}
               </Typography>
               <Typography
                 variant="body1"
                 sx={{ fontWeight: 600, fontSize: 18, mb: 2 }}
               >
-                Release Date:{movies?.release_date}
+                <span style={{ color: "grey" }}>Release Date : </span>
+                {movies?.release_date}
               </Typography>
               <Typography
                 variant="body1"

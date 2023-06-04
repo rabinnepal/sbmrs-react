@@ -71,6 +71,16 @@ export default function AdminDashboard(props) {
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
+          <ListItemButton
+            onClick={(event) => navigate("/admin/display-categories")}
+          >
+            <ListItemIcon>
+              <Group />
+            </ListItemIcon>
+            <ListItemText primary="Categories" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
           <ListItemButton onClick={(event) => navigate("/admin/add-movie")}>
             <ListItemIcon>
               <Add />

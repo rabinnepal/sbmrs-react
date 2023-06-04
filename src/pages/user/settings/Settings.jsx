@@ -48,9 +48,10 @@ function Setting() {
   return (
     <>
       <Box
-        bgcolor="#grey"
+        className="background-image"
         sx={{
           height: "500px",
+          color: "white",
           // position: "relative",
         }}
       >
@@ -83,7 +84,7 @@ function Setting() {
             />
           </Box>
           <Box sx={{ height: 100, mt: 4 }}>
-            <div style={{ color: "#000", marginTop: "30px" }}>
+            <div style={{ marginTop: "30px" }}>
               <Box sx={{ display: "flex", gap: 2 }}>
                 <Link to="/about">About Us</Link>
               </Box>

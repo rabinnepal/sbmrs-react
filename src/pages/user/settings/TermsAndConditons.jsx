@@ -3,8 +3,8 @@ import { Typography, Box, Container } from "@mui/material";
 
 const TermsAndConditions = () => {
   return (
-    <Container>
-      <Box maxWidth="1000px">
+    <Box className="background-image" sx={{ width: "100%", color: "white" }}>
+      <Container>
         <Typography variant="h3" fontWeight="bold" sx={{ pt: 5, mb: 3 }}>
           Terms and Conditions
         </Typography>
@@ -129,8 +129,8 @@ const TermsAndConditions = () => {
             conditions, please contact us at contact@sbmrs.com.
           </Typography>
         </Box>
-      </Box>
-    </Container>
+      </Container>
+    </Box>
   );
 };
 

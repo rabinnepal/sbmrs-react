@@ -89,13 +89,11 @@ export default function Movies() {
       const formData = {
         searchText: q,
       };
-      console.log(formData, "formData");
       const res = await axios.post(
         `${api.baseURL}admin/search-movies/`,
         formData,
         configToken
       );
-      console.log(res);
       setSearch(res.data.results);
     },
     [q]
@@ -105,7 +103,6 @@ export default function Movies() {
     getMovies();
     searchMovies();
   }, [getMovies, searchMovies]);
-  console.log(search);
 
   return (
     <Box
@@ -167,7 +164,7 @@ export default function Movies() {
 
                     <TableCell align="right">
                       <Stack direction="row">
-                        <UpdateMovieModal id={movie._id} />
+                        <UpdateMovieModal id={movie._id} movie={movie} />
                         <Button
                           color="error"
                           onClick={() => {

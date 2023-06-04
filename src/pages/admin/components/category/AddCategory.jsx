@@ -29,7 +29,7 @@ export default function AddCategory() {
     };
 
     await axios
-      .post(`${api.baseURL}admin/add-new-category/`, formData, config)
+      .post(`${api.baseURL}admin/add-category/`, formData, config)
       .then((res) => {
         if (res.data.success === true) {
           console.log(res);

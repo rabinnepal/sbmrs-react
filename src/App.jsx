@@ -23,6 +23,7 @@ import AuthController from "./pages/global/AuthController";
 import AboutUs from "./pages/user/settings/AboutUs";
 import TermsAndConditions from "./pages/user/settings/TermsAndConditons";
 import PrivacyPolicy from "./pages/user/settings/PrivacyPolicy";
+import Category from "./pages/admin/components/category/Category";
 
 function PrivateRoute({ children }) {
   const auth = AuthController();
@@ -71,6 +72,7 @@ function App() {
           <Route path="/admin/display-movies/" element={<Movies />} />
           <Route path="/admin/display-users/" element={<DisplayUser />} />
           <Route path="/admin/add-movie/" element={<AddMovie />} />
+          <Route path="/admin/display-categories/" element={<Category />} />
           <Route path="/admin/category/" element={<AddCategory />} />
         </Route>
         {/* admin dashboard outlet end */}

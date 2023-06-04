@@ -49,12 +49,11 @@ const ViewMovieRating = () => {
   return (
     <>
       {Array.isArray(movies) === true ? (
-        <Box>
-          className="back"
+        <Box className="background-image">
           {movies?.map((movie) => {
             return (
               <>
-                <Box
+                <Container
                   sx={{
                     display: "flex",
                     flexDirection: "column",
@@ -78,8 +77,7 @@ const ViewMovieRating = () => {
                   <img
                     src={movie.movie_id?.image}
                     alt={movie.movie_id?.movie_title}
-                    height={400}
-                    width={200}
+                    width={400}
                   />
                   <Box sx={{ my: 5, display: "flex", gap: 3 }}>
                     <Typography sx={{ fontWeight: 600, fontSize: 18 }}>
@@ -102,7 +100,7 @@ const ViewMovieRating = () => {
                     <Button variant="contained">Add your comment</Button>
                     <Box sx={{ height: "15vh" }} />
                   </Link>
-                </Box>
+                </Container>
                 <Container>
                   <Box>
                     <Typography sx={{ fontSize: 20, fontWeight: 700 }}>
@@ -169,8 +167,8 @@ const ViewMovieRating = () => {
           })}
         </Box>
       ) : (
-        <Box className="back">
-          <Box
+        <Box className="background-image">
+          <Container
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -192,12 +190,7 @@ const ViewMovieRating = () => {
             >
               {movies?.description}
             </Typography>
-            <img
-              src={movies?.image}
-              alt={movies?.movie_title}
-              height={400}
-              width={200}
-            />
+            <img src={movies?.image} alt={movies?.movie_title} width={400} />
             <Box sx={{ my: 5, display: "flex", gap: 3 }}>
               <Typography sx={{ fontWeight: 600, fontSize: 18 }}>
                 Overall Rating
@@ -219,7 +212,7 @@ const ViewMovieRating = () => {
               <Button variant="contained">Add your comment</Button>
               <Box sx={{ height: "15vh" }} />
             </Link>
-          </Box>
+          </Container>
         </Box>
       )}
     </>

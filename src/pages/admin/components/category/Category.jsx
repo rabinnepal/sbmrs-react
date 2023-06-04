@@ -15,6 +15,7 @@ import {
   Grid,
   Container,
 } from "@mui/material";
+import { APIClass } from "../../../../APICaller/APICaller";
 // import UpdateCategory from "./UpdateCategory";
 
 const drawerWidth = 240;
@@ -22,14 +23,26 @@ export default function Category() {
   const [categories, setCategories] = useState([]);
   const [deleted, setDeleted] = useState([]);
 
+  const token = `Bearer ${localStorage.getItem("token")}`;
   const api = new APIClass();
 
   // // display  all categories
   const getCategories = useCallback(async (e) => {
-    await axios.get(`${api.baseURL}category/get/`).then((res) => {
+    const configToken = {
+      headers: {
+        Authorization: token,
+      },
+    };
+    try {
+      let res = await axios.get(
+        `${api.baseURL}admin/list-category/`,
+        configToken
+      );
       console.log(res.data);
-      setCategories(res.data.data);
-    });
+      setCategories(res.data.categories);
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
 
   useEffect(() => {
@@ -38,13 +51,13 @@ export default function Category() {
 
   // delete categories
   const handleDelete = async (id) => {
-    let config = {
+    const config = {
       headers: {
-        "x-access-token": localStorage.getItem("token"),
+        Authorization: token,
       },
     };
     await axios
-      .delete(`${api.baseURL}category/delete/${id}/`, config)
+      .post(`${api.baseURL}admin/remove-category/`, config, id)
       .then((response) => {
         setDeleted(true);
         getCategories();
@@ -68,28 +81,22 @@ export default function Category() {
         <Typography variant="h4">List of all category</Typography>
         <Grid container spacing={4}>
           {categories.map((category, index) => (
-            <Grid item xs={5} key={index}>
+            <Grid item xs={4} key={index}>
               <Card>
-                <CardMedia
-                  sx={{ height: 140 }}
-                  image={category.image}
-                  // image="https://source.unsplash.com/random"
-                  title={category.name}
-                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                    {category.name}
+                    {category.category}
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <UpdateCategory
+                  {/* <UpdateCategory
                     id={category.id}
                     getCategories={getCategories}
-                  />
+                  /> */}
                   <Button
                     color="error"
                     onClick={() => {
-                      handleDelete(category.id);
+                      handleDelete(category._id);
                     }}
                   >
                     Delete

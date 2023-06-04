@@ -32,15 +32,14 @@ const style = {
   p: 4,
 };
 
-const UpdateMovieModal = ({ id }) => {
+const UpdateMovieModal = ({ id, movie }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [movie, setMovie] = useState(0);
 
   const api = new APIClass();
   const token = localStorage.getItem("token");
-  // console.log(id);
+  console.log(movie, id, "fghjkl");
 
   const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
@@ -59,7 +58,6 @@ const UpdateMovieModal = ({ id }) => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     };
-    console.log(id);
     await axios
       .post(`${api.baseURL}admin/update-movie/${id}`, formData, config)
       .then((res) => {
@@ -92,7 +90,8 @@ const UpdateMovieModal = ({ id }) => {
               variant="outlined"
               name="title"
               width="100%"
-              label="Add movie name"
+              placeholder="Add movie name"
+              defaultValue={movie.movie_title}
               fullWidth
               sx={{ my: 2 }}
             />
@@ -102,7 +101,8 @@ const UpdateMovieModal = ({ id }) => {
               multiline
               rows={4}
               width="100%"
-              label="Add movie description"
+              placeholder="Add movie description"
+              defaultValue={movie.description}
               fullWidth
               sx={{ my: 2 }}
             />
@@ -110,7 +110,8 @@ const UpdateMovieModal = ({ id }) => {
               variant="outlined"
               name="category"
               width="100%"
-              label="Add movie category"
+              placeholder="Add movie category"
+              defaultValue={movie.categories[0].category}
               fullWidth
               sx={{ my: 2 }}
             />
@@ -121,6 +122,7 @@ const UpdateMovieModal = ({ id }) => {
               name="date"
               type="date"
               width="100%"
+              defaultValue={movie.release_date}
               fullWidth
               sx={{ my: 2 }}
             />

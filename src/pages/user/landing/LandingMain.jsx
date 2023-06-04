@@ -13,7 +13,7 @@ import NewReleased from "./NewReleased";
 const LandingMain = () => {
   return (
     <div
-      className="back"
+      className="background-image"
       style={{
         display: "flex",
         flexDirection: "column",

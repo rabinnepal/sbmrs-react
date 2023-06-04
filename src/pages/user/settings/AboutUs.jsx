@@ -3,8 +3,14 @@ import React from "react";
 
 const AboutUs = () => {
   return (
-    <Container>
-      <Box maxWidth="1000px">
+    <Box
+      className="background-image"
+      sx={{
+        width: "100%",
+        color: "white",
+      }}
+    >
+      <Container>
         <Box>
           <Typography variant="h3" fontWeight="bold" sx={{ pt: 5, mb: 3 }}>
             About Us
@@ -109,8 +115,8 @@ const AboutUs = () => {
           <Typography>Reg no. 2345-2312432-12</Typography>
           <Typography>contact@sbmrs.com</Typography>
         </Box>
-      </Box>
-    </Container>
+      </Container>
+    </Box>
   );
 };
 

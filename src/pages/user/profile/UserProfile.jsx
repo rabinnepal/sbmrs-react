@@ -92,13 +92,14 @@ function UserProfile() {
 
   return (
     <>
-      <Box bgcolor="#grey">
+      <Box className="background-image">
         <Container>
           <Box
             sx={{
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              color: "white",
             }}
           >
             <Typography variant="h4" sx={{ color: "#", my: 2, fontSize: 40 }}>
@@ -144,13 +145,9 @@ function UserProfile() {
               </Box>
             </Modal>
 
-            <div style={{ color: "#000", marginTop: "30px" }}>
+            <div style={{ marginTop: "30px" }}>
               <Box sx={{ display: "flex", gap: 2 }}>
-                <Typography
-                  variant="h6"
-                  fontWeight="medium"
-                  color="text.secondary"
-                >
+                <Typography variant="h6" fontWeight="medium">
                   Name:
                 </Typography>
                 <Typography variant="h5" fontWeight="medium">
@@ -158,11 +155,7 @@ function UserProfile() {
                 </Typography>
               </Box>
               <Box sx={{ display: "flex", gap: 2 }}>
-                <Typography
-                  variant="h6"
-                  fontWeight="medium"
-                  color="text.secondary"
-                >
+                <Typography variant="h6" fontWeight="medium">
                   Username:
                 </Typography>
                 <Typography variant="h6" fontWeight="medium">
@@ -170,11 +163,7 @@ function UserProfile() {
                 </Typography>
               </Box>
               <Box sx={{ display: "flex", gap: 2 }}>
-                <Typography
-                  variant="h6"
-                  fontWeight="medium"
-                  color="text.secondary"
-                >
+                <Typography variant="h6" fontWeight="medium">
                   Email:
                 </Typography>
                 <Typography variant="h6" fontWeight="medium">
@@ -191,7 +180,7 @@ function UserProfile() {
         </Container>
       </Box>
 
-      <Box bgcolor="#grey" sx={{ height: "100px" }}></Box>
+      <Box className="background-image" sx={{ height: "100px" }}></Box>
     </>
   );
 }
