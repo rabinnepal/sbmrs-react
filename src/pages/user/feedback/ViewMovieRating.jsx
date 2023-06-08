@@ -59,7 +59,8 @@ const ViewMovieRating = () => {
                     flexDirection: "column",
                     justifyContent: "center",
                     alignItems: "center",
-                    mt: 2,
+                    pt: 2,
+                    color: "white",
                   }}
                 >
                   <Typography
@@ -103,7 +104,9 @@ const ViewMovieRating = () => {
                 </Container>
                 <Container>
                   <Box>
-                    <Typography sx={{ fontSize: 20, fontWeight: 700 }}>
+                    <Typography
+                      sx={{ fontSize: 20, fontWeight: 700, color: "white" }}
+                    >
                       User's Feedback
                     </Typography>
                     {movie.score?.map((score) => {

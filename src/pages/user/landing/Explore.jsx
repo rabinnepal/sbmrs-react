@@ -32,6 +32,7 @@ const Explore = () => {
   useEffect(() => {
     getMovies();
   }, [getMovies]);
+  console.log(movies);
 
   return (
     <div>
@@ -93,9 +94,6 @@ const Explore = () => {
                     <Box sx={{ ml: 1, mt: 1 }}>
                       <Typography sx={{ fontSize: 20, color: "white" }}>
                         {movie.movie_title}
-                      </Typography>
-                      <Typography sx={{ color: "white" }}>
-                        {movie.categories[0].category}
                       </Typography>
                     </Box>
                   </Card>
