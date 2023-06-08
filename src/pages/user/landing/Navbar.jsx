@@ -83,7 +83,7 @@ function Navbar() {
               textDecoration: "none",
             }}
           >
-            <img src="public/logo.jpeg" alt="logo" height={50} width={50} />
+            <img src="/public/logo.jpeg" alt="logo" height={50} width={50} />
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -139,7 +139,7 @@ function Navbar() {
               textDecoration: "none",
             }}
           >
-            <img src="public/logo.jpeg" alt="logo" height={50} width={50} />
+            <img src="/public/logo.jpeg" alt="logo" height={50} width={50} />
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Link to="/">

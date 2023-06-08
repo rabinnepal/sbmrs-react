@@ -43,7 +43,7 @@ const UpdateMovieModal = ({ movie }) => {
   const api = new APIClass();
   const token = localStorage.getItem("token");
 
-  const [categories, setCategories] = useState();
+  const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
 
   const handleCategoryChange = (event, value) => {
@@ -51,10 +51,10 @@ const UpdateMovieModal = ({ movie }) => {
     setSelectedCategories(selectedCategoryNames);
   };
   // // display  all categories
-  const getCategories = React.useCallback(async (e) => {
+  const getCategories = useCallback(async (e) => {
     const configToken = {
       headers: {
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
     };
     try {
@@ -84,7 +84,7 @@ const UpdateMovieModal = ({ movie }) => {
       headers: {
         "Content-Type": "multipart/form-data",
         Accept: "application/json",
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
     };
     await axios
@@ -102,14 +102,15 @@ const UpdateMovieModal = ({ movie }) => {
       });
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     getCategories();
   }, [getCategories]);
+  console.log(categories);
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ mt: 4 }}>
-        <Button sx={{ mr: 2, mb: 3.8 }} onClick={handleOpen}>
+      <Box>
+        <Button variant="contained" onClick={handleOpen}>
           Edit
         </Button>
         <Modal

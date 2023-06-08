@@ -70,7 +70,6 @@ const ViewSingleMovie = () => {
   useEffect(() => {
     getData();
   }, []);
-  console.log(movies);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
@@ -172,10 +171,11 @@ const ViewSingleMovie = () => {
                 justifyContent: "flex-end",
               }}
             >
-              <UpdateMovieModal movie={movies} />
+              <UpdateMovieModal sx={{ width: "50%" }} movie={movies} />
               <Button
                 color="error"
                 variant="contained"
+                sx={{ width: "auto" }}
                 onClick={() => {
                   handleDelete(movies._id);
                 }}

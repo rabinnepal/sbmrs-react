@@ -116,7 +116,8 @@ const ViewMovieRating = () => {
                             display: "flex",
                             flexDirection: "column",
                             gap: 3,
-                            my: 2,
+                            mt: 2,
+                            py: 2,
                             p: 2,
                           }}
                         >
