@@ -28,7 +28,8 @@ import {
 import { APIClass } from "../../../../APICaller/APICaller";
 import { Delete, Edit, Search } from "@mui/icons-material";
 import UpdateMovieModal from "./UpdateMovieModal";
-import ViewSingleMovieModal from "./ViewSingleMovieModal";
+import ViewSingleMovieModal from "./ViewSingleMovie";
+import { Link, useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 export default function Movies() {
@@ -39,6 +40,7 @@ export default function Movies() {
 
   const api = new APIClass();
   const token = `Bearer ${localStorage.getItem("token")}`;
+  const navigate = useNavigate();
 
   // // display  all movies
   const getMovies = useCallback(async () => {
@@ -55,7 +57,7 @@ export default function Movies() {
     setMovies(res.data.movies);
   }, []);
 
-  // delete artist
+  // delete movies
 
   const handleDelete = async (id) => {
     const configToken = {
@@ -145,45 +147,44 @@ export default function Movies() {
             </TableHead>
             <TableBody>
               {search.length !== 0 ? (
-                search.map((movie, index) => (
-                  <TableRow
-                    key={index}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      <img
-                        src={movie.image}
-                        alt={movie.movie_title}
-                        height={150}
-                        width={150}
-                      />
-                    </TableCell>
-                    <TableCell align="right">{movie.movie_title}</TableCell>
-                    <TableCell align="right">{movie.description}</TableCell>
-                    <TableCell align="right">{movie.release_date}</TableCell>
+                search.map((movie, index) => {
+                  return (
+                    <TableRow
+                      key={index}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        <img
+                          src={movie.image}
+                          alt={movie.movie_title}
+                          height={150}
+                          width={150}
+                        />
+                      </TableCell>
+                      <TableCell align="right">{movie.movie_title}</TableCell>
+                      <TableCell
+                        align="right"
+                        sx={{
+                          maxWidth: "200px",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {movie.description}
+                      </TableCell>
+                      <TableCell align="right">{movie.release_date}</TableCell>
 
-                    <TableCell align="right">
-                      <Stack direction="row">
-                        <UpdateMovieModal id={movie._id} movie={movie} />
+                      <TableCell align="right">
                         <Button
-                          color="error"
-                          onClick={() => {
-                            handleDelete(movie._id);
-                          }}
+                          onClick={() => navigate(`/admin/movies/${movie._id}`)}
                         >
-                          <Delete />
+                          View Details
                         </Button>
-                      </Stack>
-                    </TableCell>
-                    {/* <Button align="right" variant="outlined" sx={{ mt: 10 }}>
-                    See more
-                  </Button> */}
-
-                    <TableCell align="right">
-                      <ViewSingleMovieModal id={movie._id} />
-                    </TableCell>
-                  </TableRow>
-                ))
+                      </TableCell>
+                    </TableRow>
+                  );
+                })
               ) : (
                 <TableRow>
                   <TableCell colSpan={5} sx={{ textAlign: "center" }}>

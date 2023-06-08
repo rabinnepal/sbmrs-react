@@ -48,6 +48,7 @@ export default function Category() {
   useEffect(() => {
     getCategories();
   }, [getCategories]);
+  console.log(categories);
 
   // delete categories
   const handleDelete = async (category_id) => {

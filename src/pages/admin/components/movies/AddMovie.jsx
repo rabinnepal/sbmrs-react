@@ -3,12 +3,6 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Autocomplete, Button, OutlinedInput, TextField } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import Chip from "@mui/material/Chip";
 
 import { useState } from "react";
 import axios from "axios";
@@ -16,41 +10,17 @@ import { APIClass } from "../../../../APICaller/APICaller";
 
 const drawerWidth = 240;
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
-
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
 export default function AddMovie() {
   const api = new APIClass();
   const token = `Bearer ${localStorage.getItem("token")}`;
 
-  const theme = useTheme();
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
 
   const handleCategoryChange = (event, value) => {
-    setSelectedCategories(value.map((item) => item._id));
+    const selectedCategoryNames = value.map((item) => item.category);
+    setSelectedCategories(selectedCategoryNames);
   };
-
-  const getOptionLabel = (option) => option.category;
-
-  const isOptionEqualToValue = (option, value) => option._id === value;
-  console.log(selectedCategories);
 
   // // display  all categories
   const getCategories = React.useCallback(async (e) => {
@@ -70,15 +40,17 @@ export default function AddMovie() {
     }
   }, []);
 
-  // add banner
+  // add movie
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const formattedCategories = selectedCategories.join(", ");
     const data = new FormData(e.currentTarget);
     let formData = {
       movie_title: data.get("title"),
       description: data.get("description"),
-      category: data.get("category"),
+      category: formattedCategories,
       release_date: data.get("date"),
       image: data.get("image"),
     };
@@ -152,12 +124,11 @@ export default function AddMovie() {
         <Autocomplete
           multiple
           options={categories}
-          getOptionLabel={getOptionLabel}
-          value={categories.filter((category) =>
-            selectedCategories.includes(category._id)
+          getOptionLabel={(option) => option.category}
+          value={selectedCategories.map((category) =>
+            categories.find((item) => item.category === category)
           )}
           onChange={handleCategoryChange}
-          isOptionEqualToValue={isOptionEqualToValue}
           renderInput={(params) => (
             <TextField
               {...params}

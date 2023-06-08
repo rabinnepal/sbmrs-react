@@ -1,4 +1,5 @@
 import {
+  Autocomplete,
   Avatar,
   Box,
   Button,
@@ -17,6 +18,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { CalendarMonth, Edit, LocationOn } from "@mui/icons-material";
 import axios from "axios";
 import { APIClass } from "../../../../APICaller/APICaller";
+import { useParams } from "react-router-dom";
 
 const theme = createTheme();
 
@@ -32,22 +34,49 @@ const style = {
   p: 4,
 };
 
-const UpdateMovieModal = ({ id, movie }) => {
+const UpdateMovieModal = ({ movie }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const { id } = useParams();
   const api = new APIClass();
   const token = localStorage.getItem("token");
-  console.log(movie, id, "fghjkl");
+
+  const [categories, setCategories] = useState();
+  const [selectedCategories, setSelectedCategories] = useState([]);
+
+  const handleCategoryChange = (event, value) => {
+    const selectedCategoryNames = value.map((item) => item.category);
+    setSelectedCategories(selectedCategoryNames);
+  };
+  // // display  all categories
+  const getCategories = React.useCallback(async (e) => {
+    const configToken = {
+      headers: {
+        Authorization: token,
+      },
+    };
+    try {
+      let res = await axios.get(
+        `${api.baseURL}admin/list-category/`,
+        configToken
+      );
+      setCategories(res.data.categories);
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
 
   const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
+    const formattedCategories = selectedCategories.join(", ");
+
     const data = new FormData(e.currentTarget);
     let formData = {
       movie_title: data.get("title"),
       description: data.get("description"),
-      category: data.get("category"),
+      category: formattedCategories,
       release_date: data.get("date"),
       image: data.get("image"),
     };
@@ -55,7 +84,7 @@ const UpdateMovieModal = ({ id, movie }) => {
       headers: {
         "Content-Type": "multipart/form-data",
         Accept: "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: token,
       },
     };
     await axios
@@ -73,11 +102,15 @@ const UpdateMovieModal = ({ id, movie }) => {
       });
   });
 
+  React.useEffect(() => {
+    getCategories();
+  }, [getCategories]);
+
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ mt: 4 }}>
         <Button sx={{ mr: 2, mb: 3.8 }} onClick={handleOpen}>
-          <Edit />
+          Edit
         </Button>
         <Modal
           open={open}
@@ -91,7 +124,7 @@ const UpdateMovieModal = ({ id, movie }) => {
               name="title"
               width="100%"
               placeholder="Add movie name"
-              defaultValue={movie.movie_title}
+              defaultValue={movie?.movie_title}
               fullWidth
               sx={{ my: 2 }}
             />
@@ -102,18 +135,26 @@ const UpdateMovieModal = ({ id, movie }) => {
               rows={4}
               width="100%"
               placeholder="Add movie description"
-              defaultValue={movie.description}
+              defaultValue={movie?.description}
               fullWidth
               sx={{ my: 2 }}
             />
-            <TextField
-              variant="outlined"
-              name="category"
-              width="100%"
-              placeholder="Add movie category"
-              defaultValue={movie.categories[0].category}
-              fullWidth
-              sx={{ my: 2 }}
+            <Autocomplete
+              multiple
+              options={categories}
+              getOptionLabel={(option) => option.category}
+              value={selectedCategories.map((category) =>
+                categories.find((item) => item.category === category)
+              )}
+              onChange={handleCategoryChange}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label="Categories"
+                  placeholder="Select categories"
+                />
+              )}
             />
 
             <Typography fontWeight="600">Add movie release date</Typography>
@@ -122,7 +163,7 @@ const UpdateMovieModal = ({ id, movie }) => {
               name="date"
               type="date"
               width="100%"
-              defaultValue={movie.release_date}
+              defaultValue={movie?.release_date}
               fullWidth
               sx={{ my: 2 }}
             />
