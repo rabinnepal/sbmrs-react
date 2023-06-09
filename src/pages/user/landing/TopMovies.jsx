@@ -16,6 +16,7 @@ import { Navigation } from "swiper";
 import axios from "axios";
 import { APIClass } from "../../../APICaller/APICaller";
 import { useNavigate } from "react-router-dom";
+import RatingDisplay from "../../global/RatingDisplay";
 
 const TopMovies = () => {
   const [movies, setMovies] = useState([]);
@@ -42,7 +43,11 @@ const TopMovies = () => {
   useEffect(() => {
     getMovies();
   }, [getMovies]);
+  console.log(movies);
 
+  const ratings = movies.map((movie) => movie.totalRating / movie.score.length);
+
+  console.log(ratings);
   return (
     <div>
       <Container>
@@ -91,10 +96,18 @@ const TopMovies = () => {
                             style={{ height: 200 }}
                           />
 
-                          <CardContent>
+                          <CardContent
+                            sx={{
+                              display: "flex",
+                              justifyContent: "space-around",
+                            }}
+                          >
                             <Typography sx={{ fontSize: 18, color: "blue" }}>
                               {movie.movie_id.movie_title}
                             </Typography>
+                            <Box>
+                              <RatingDisplay rating={4.5} />
+                            </Box>
                           </CardContent>
                         </Card>
                       </Box>
