@@ -18,10 +18,12 @@ import { APIClass } from "../../../APICaller/APICaller";
 import { useNavigate } from "react-router-dom";
 import RatingDisplay from "../../global/RatingDisplay";
 
-const TopMovies = () => {
+const TopMovies = ({ topMovies }) => {
   const [movies, setMovies] = useState([]);
   const [deleted, setDeleted] = useState([]);
   const navigate = useNavigate();
+
+  console.log(topMovies, "topMovies");
 
   const api = new APIClass();
   const token = `Bearer ${localStorage.getItem("token")}`;
@@ -86,13 +88,17 @@ const TopMovies = () => {
             return (
               <SwiperSlide key={index}>
                 {() => {
-                  if (movie?.score[0].rating >= 4)
+                  if (movie?.score.length === 0 || movie?.score[0].rating >= 4)
                     return (
                       <Box sx={{ p: 2, borderRadius: 20 }}>
-                        <Card onClick={(e) => navigate(`/rating/${movie._id}`)}>
+                        <Card
+                          onClick={(e) =>
+                            navigate(`/rating/${movie.movie_id._id}`)
+                          }
+                        >
                           <CardMedia
-                            image={movie.movie_id.image}
-                            alt={movie.movie_id.movie_title}
+                            image={movie?.movie_id?.image}
+                            alt={movie?.movie_id?.movie_title}
                             style={{ height: 200 }}
                           />
 
@@ -103,10 +109,10 @@ const TopMovies = () => {
                             }}
                           >
                             <Typography sx={{ fontSize: 18, color: "blue" }}>
-                              {movie.movie_id.movie_title}
+                              {movie?.movie_id?.movie_title}
                             </Typography>
                             <Box>
-                              <RatingDisplay rating={4.5} />
+                              <RatingDisplay rating={ratings[index]} />
                             </Box>
                           </CardContent>
                         </Card>

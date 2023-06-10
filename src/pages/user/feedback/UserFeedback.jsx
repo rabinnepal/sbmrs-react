@@ -127,6 +127,8 @@ const UserFeedback = () => {
             name="rating"
             size="large"
             value={value}
+            defaultValue={2.5}
+            precision={0.5}
             onChange={(event, newValue) => {
               setValue(newValue);
             }}
