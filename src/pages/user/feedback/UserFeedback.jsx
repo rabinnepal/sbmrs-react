@@ -129,6 +129,7 @@ const UserFeedback = () => {
             value={value}
             defaultValue={2.5}
             precision={0.5}
+            sx={{ border: "ridge" }}
             onChange={(event, newValue) => {
               setValue(newValue);
             }}

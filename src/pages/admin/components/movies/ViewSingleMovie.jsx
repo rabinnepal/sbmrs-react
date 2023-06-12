@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Card,
+  CircularProgress,
   Container,
   Divider,
   Modal,
@@ -28,7 +29,6 @@ const ViewSingleMovie = () => {
   const api = new APIClass();
   const token = localStorage.getItem("token");
   const { id } = useParams();
-  console.log(id);
 
   const getData = useCallback(async (e) => {
     const configToken = {
@@ -70,6 +70,16 @@ const ViewSingleMovie = () => {
   useEffect(() => {
     getData();
   }, []);
+  if (!movies) {
+    return (
+      <Box>
+        <Toolbar />
+        <Box sx={{ p: 4 }}>
+          <CircularProgress />
+        </Box>
+      </Box>
+    );
+  }
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
@@ -171,7 +181,11 @@ const ViewSingleMovie = () => {
                 justifyContent: "flex-end",
               }}
             >
-              <UpdateMovieModal sx={{ width: "50%" }} movie={movies} />
+              <UpdateMovieModal
+                sx={{ width: "50%" }}
+                movie={movies}
+                getData={getData}
+              />
               <Button
                 color="error"
                 variant="contained"

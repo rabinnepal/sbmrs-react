@@ -70,7 +70,7 @@ export default function AdminDashboard(props) {
             <ListItemText primary="Users" />
           </ListItemButton>
         </ListItem>
-        <ListItem disablePadding>
+        {/* <ListItem disablePadding>
           <ListItemButton
             onClick={(event) => navigate("/admin/display-categories")}
           >
@@ -79,7 +79,7 @@ export default function AdminDashboard(props) {
             </ListItemIcon>
             <ListItemText primary="Categories" />
           </ListItemButton>
-        </ListItem>
+        </ListItem> */}
         <ListItem disablePadding>
           <ListItemButton onClick={(event) => navigate("/admin/add-movie")}>
             <ListItemIcon>

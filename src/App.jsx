@@ -25,6 +25,7 @@ import TermsAndConditions from "./pages/user/settings/TermsAndConditons";
 import PrivacyPolicy from "./pages/user/settings/PrivacyPolicy";
 import Category from "./pages/admin/components/category/Category";
 import ViewSingleMovie from "./pages/admin/components/movies/ViewSingleMovie";
+import UpdateMovie from "./pages/admin/components/movies/UpdateMovie";
 
 function PrivateRoute({ children }) {
   const auth = AuthController();
@@ -72,6 +73,7 @@ function App() {
           <Route path="/admin/approve-vendors/" element={<ApproveVendors />} />
           <Route path="/admin/display-movies/" element={<Movies />} />
           <Route path="/admin/movies/:id" element={<ViewSingleMovie />} />
+          {/* <Route path="/admin/edit-movie/:id" element={<UpdateMovie />} /> */}
           <Route path="/admin/display-users/" element={<DisplayUser />} />
           <Route path="/admin/add-movie/" element={<AddMovie />} />
           <Route path="/admin/display-categories/" element={<Category />} />

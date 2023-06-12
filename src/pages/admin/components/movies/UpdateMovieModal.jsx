@@ -1,21 +1,14 @@
 import {
   Autocomplete,
-  Avatar,
   Box,
   Button,
-  Card,
-  Container,
-  Divider,
-  Grid,
   Modal,
-  Stack,
   TextField,
   Typography,
 } from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { CalendarMonth, Edit, LocationOn } from "@mui/icons-material";
 import axios from "axios";
 import { APIClass } from "../../../../APICaller/APICaller";
 import { useParams } from "react-router-dom";
@@ -34,7 +27,7 @@ const style = {
   p: 4,
 };
 
-const UpdateMovieModal = ({ movie }) => {
+const UpdateMovieModal = ({ movie, getData }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -78,26 +71,27 @@ const UpdateMovieModal = ({ movie }) => {
       description: data.get("description"),
       category: formattedCategories,
       release_date: data.get("date"),
-      image: data.get("image"),
     };
     let config = {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
         Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
     };
+    console.log(formData);
     await axios
       .post(`${api.baseURL}admin/update-movie/${id}`, formData, config)
       .then((res) => {
         if (res.data.success === true) {
           console.log(res.data);
           window.alert("Added Successfully!!");
-          e.target.reset();
+          handleClose();
+          window.location.reload();
         } else {
           console.log(res.data);
           window.alert("Task failed!!");
-          e.target.reset();
+          handleClose();
         }
       });
   });
@@ -105,7 +99,6 @@ const UpdateMovieModal = ({ movie }) => {
   useEffect(() => {
     getCategories();
   }, [getCategories]);
-  console.log(categories);
 
   return (
     <ThemeProvider theme={theme}>
@@ -125,7 +118,11 @@ const UpdateMovieModal = ({ movie }) => {
               name="title"
               width="100%"
               placeholder="Add movie name"
-              defaultValue={movie?.movie_title}
+              defaultValue={
+                Object.keys(movie).length === 6
+                  ? movie?.movie_id?.movie_title
+                  : movie?.movie_title
+              }
               fullWidth
               sx={{ my: 2 }}
             />
@@ -136,7 +133,11 @@ const UpdateMovieModal = ({ movie }) => {
               rows={4}
               width="100%"
               placeholder="Add movie description"
-              defaultValue={movie?.description}
+              defaultValue={
+                Object.keys(movie).length === 6
+                  ? movie?.movie_id?.description
+                  : movie?.description
+              }
               fullWidth
               sx={{ my: 2 }}
             />
@@ -164,16 +165,13 @@ const UpdateMovieModal = ({ movie }) => {
               name="date"
               type="date"
               width="100%"
-              defaultValue={movie?.release_date}
+              defaultValue={
+                Object.keys(movie).length === 6
+                  ? movie?.movie_id?.release_date
+                  : movie?.release_date
+              }
               fullWidth
               sx={{ my: 2 }}
-            />
-            <Typography fontWeight="600">Upload image</Typography>
-            <TextField
-              type="file"
-              name="image"
-              variant="outlined"
-              sx={{ mb: 3 }}
             />
             <Button
               type="submit"

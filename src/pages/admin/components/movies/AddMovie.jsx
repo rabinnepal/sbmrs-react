@@ -68,7 +68,7 @@ export default function AddMovie() {
         if (res.data.success === true) {
           console.log(res.data);
           window.alert("Added Successfully!!");
-          e.target.reset();
+          window.location.href = "/admin/add-movie";
         } else {
           console.log(res.data);
           window.alert("Task failed!!");

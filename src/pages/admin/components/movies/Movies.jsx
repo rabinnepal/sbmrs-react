@@ -27,7 +27,7 @@ import {
 } from "@mui/material";
 import { APIClass } from "../../../../APICaller/APICaller";
 import { Delete, Edit, Search } from "@mui/icons-material";
-import UpdateMovieModal from "./UpdateMovieModal";
+import UpdateMovieModal from "./UpdateMovie";
 import ViewSingleMovieModal from "./ViewSingleMovie";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -56,6 +56,7 @@ export default function Movies() {
     );
     setMovies(res.data.movies);
   }, []);
+  console.log(movies);
 
   // delete movies
 

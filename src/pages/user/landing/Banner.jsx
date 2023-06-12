@@ -5,7 +5,7 @@ const Banner = () => {
   return (
     <Box>
       <img
-        src="/public/banner.jpeg"
+        src="../../../public/banner.jpeg"
         alt="banner"
         style={{
           backgroundSize: "cover",
