@@ -70,7 +70,7 @@ const Explore = () => {
           }}
         >
           {movies
-            .slice(0, 3)
+            .slice(0, 10)
             .sort(() => Math.random() - 0.5)
             ?.map((movie, index) => {
               return (

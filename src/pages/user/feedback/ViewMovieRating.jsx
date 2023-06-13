@@ -135,11 +135,11 @@ const ViewMovieRating = () => {
                             }}
                           >
                             <Avatar
-                              src={score.user_id.profilePicture}
-                              alt={score.user_id.fullName}
+                              src={score?.user_id?.profilePicture}
+                              alt={score?.user_id?.fullName}
                             />
                             <Typography sx={{ color: "blue", fontWeight: 600 }}>
-                              {score.user_id.fullName}
+                              {score?.user_id?.fullName}
                             </Typography>
                             <Rating
                               value={score.rating}
