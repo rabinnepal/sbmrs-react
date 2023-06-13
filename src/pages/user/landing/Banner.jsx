@@ -16,11 +16,11 @@ const Banner = () => {
           opacity: "80%",
         }}
       />
-      <Typography
+      {/* <Typography
         variant="h2"
         style={{
           position: "absolute",
-          top: "20%",
+          top: "0%",
           left: "50%",
           transform: "translate(-50%, -50%)",
           color: "white",
@@ -30,7 +30,7 @@ const Banner = () => {
         }}
       >
         SENTIMENT BASED MOVIE RATING SYSTEM
-      </Typography>
+      </Typography> */}
     </Box>
   );
 };

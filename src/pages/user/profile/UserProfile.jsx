@@ -14,6 +14,7 @@ import {
 import { APIClass } from "../../../APICaller/APICaller";
 import axios from "axios";
 import { Settings } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 // import AppliedJobs from "./AppliedJobs";
 
 const style = {
@@ -144,6 +145,17 @@ function UserProfile() {
                 </Button>
               </Box>
             </Modal>
+            <Box sx={{ pt: 4, color: "white" }}>
+              <Link to="/update-profile">
+                <Button
+                  sx={{ color: "white" }}
+                  variant="contained"
+                  size="small"
+                >
+                  Update Profile
+                </Button>
+              </Link>
+            </Box>
 
             <div style={{ marginTop: "30px" }}>
               <Box sx={{ display: "flex", gap: 2 }}>
@@ -172,11 +184,6 @@ function UserProfile() {
               </Box>
             </div>
           </Box>
-          {/* <Box sx={{ height: 100, mt: 4 }}>
-            <Button variant="contained" startIcon={<Settings />}>
-              Settings
-            </Button>
-          </Box> */}
         </Container>
       </Box>
 

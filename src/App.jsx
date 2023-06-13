@@ -25,6 +25,7 @@ import Category from "./pages/admin/components/category/Category";
 import ViewSingleMovie from "./pages/admin/components/movies/ViewSingleMovie";
 import UpdateMovie from "./pages/admin/components/movies/UpdateMovie";
 import ForgotPassword from "./pages/auth/ForgotPassword";
+import UpdateProfileForm from "./pages/user/profile/UpdateProfile";
 
 function PrivateRoute({ children }) {
   const auth = AuthController();
@@ -55,6 +56,7 @@ function App() {
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/rating/:id" element={<ViewMovieRating />} />
           <Route path="/feedback/:id" element={<UserFeedback />} />
+          <Route path="/update-profile" element={<UpdateProfileForm />} />
           <Route path="/settings" element={<Setting />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/terms" element={<TermsAndConditions />} />

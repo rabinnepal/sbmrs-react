@@ -15,7 +15,6 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { APIClass } from "../../../APICaller/APICaller";
-import SearchMovies from "./SearchMovies";
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -169,6 +168,17 @@ function Navbar() {
                 Movies
               </Button>
             </Link>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              mr: 70,
+              fontWeight: "bold",
+              fontSize: 25,
+            }}
+          >
+            <Typography>Sentiment Based Movie Rating System</Typography>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
