@@ -44,7 +44,7 @@ const ViewMovieRating = () => {
       getMovie();
     }
   }, [getMovie]);
-  console.log(movies);
+  console.log(movies, "hehgjkl");
 
   return (
     <>
@@ -68,6 +68,12 @@ const ViewMovieRating = () => {
                     sx={{ color: "#7987FF", fontWeight: "bold", fontSize: 26 }}
                   >
                     {movie.movie_id?.movie_title}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={{ fontWeight: 600, fontSize: 18, my: 2 }}
+                  >
+                    Category : {movie.movie_id?.category}
                   </Typography>
                   <Typography
                     variant="body1"

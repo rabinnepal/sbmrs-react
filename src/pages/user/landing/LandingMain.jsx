@@ -9,30 +9,6 @@ import { APIClass } from "../../../APICaller/APICaller";
 import axios from "axios";
 
 const LandingMain = () => {
-  const [movies, setMovies] = useState([]);
-
-  const api = new APIClass();
-  const token = `Bearer ${localStorage.getItem("token")}`;
-
-  // // display  top movies
-  const getMovies = useCallback(async (e) => {
-    const configToken = {
-      headers: {
-        Authorization: token,
-      },
-    };
-    const res = await axios.get(
-      `${api.baseURL}user/get-toprated-movies/`,
-      configToken
-    );
-    setMovies(res.data.movies);
-  }, []);
-
-  useEffect(() => {
-    getMovies();
-  }, [getMovies]);
-  console.log(movies);
-
   return (
     <div
       className="background-image"
@@ -45,7 +21,7 @@ const LandingMain = () => {
     >
       <Banner />
       <SearchMovies />
-      <TopMovies topMovies={movies} />
+      <TopMovies />
       <NewReleased />
       <NewMovies />
       <Explore />

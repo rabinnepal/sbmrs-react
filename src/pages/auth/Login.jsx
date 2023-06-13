@@ -119,11 +119,11 @@ export default function Login() {
             autoComplete="current-password"
           />
 
-          {/* <Box>
-            <Link to="/forgot-password" style={{ color: "black" }}>
+          <Box>
+            <Link to="/forgot-password" style={{ textDecoration: "underline" }}>
               Forgot password?
             </Link>
-          </Box> */}
+          </Box>
           <Button
             type="submit"
             fullWidth

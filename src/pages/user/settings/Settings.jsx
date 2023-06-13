@@ -64,7 +64,7 @@ function Setting() {
             }}
           >
             <Typography variant="h4" sx={{ color: "#", my: 2, fontSize: 40 }}>
-              User Profile
+              Settings
             </Typography>
             <Avatar
               sx={{

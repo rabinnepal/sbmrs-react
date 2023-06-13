@@ -3,8 +3,6 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import SendOTP from "./pages/auth/SendOTP";
-import ResetLostPassword from "./pages/auth/ResetLostPassword";
-import VerifyOTP from "./pages/auth/VerifyOTP";
 import ChangePassword from "./pages/user/landing/ChangePassword";
 import ViewMovieRating from "./pages/user/feedback/ViewMovieRating";
 import UserFeedback from "./pages/user/feedback/UserFeedback";
@@ -26,6 +24,7 @@ import PrivacyPolicy from "./pages/user/settings/PrivacyPolicy";
 import Category from "./pages/admin/components/category/Category";
 import ViewSingleMovie from "./pages/admin/components/movies/ViewSingleMovie";
 import UpdateMovie from "./pages/admin/components/movies/UpdateMovie";
+import ForgotPassword from "./pages/auth/ForgotPassword";
 
 function PrivateRoute({ children }) {
   const auth = AuthController();
@@ -41,6 +40,7 @@ function App() {
         <Route path="/login" element={<Login />} />
 
         <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         {/* navbar and footer outlet start */}
         <Route
           path="/"
@@ -80,9 +80,6 @@ function App() {
           <Route path="/admin/category/" element={<AddCategory />} />
         </Route>
         {/* admin dashboard outlet end */}
-        <Route path="/send-otp" element={<SendOTP />} />
-        <Route path="/reset-password" element={<ResetLostPassword />} />
-        <Route path="/verify-otp" element={<VerifyOTP />} />
         <Route path="/change-password" element={<ChangePassword />} />
       </Routes>
     </BrowserRouter>

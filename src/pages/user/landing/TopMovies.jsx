@@ -18,12 +18,12 @@ import { APIClass } from "../../../APICaller/APICaller";
 import { useNavigate } from "react-router-dom";
 import RatingDisplay from "../../global/RatingDisplay";
 
-const TopMovies = ({ topMovies }) => {
+const TopMovies = () => {
   const [movies, setMovies] = useState([]);
   const [deleted, setDeleted] = useState([]);
   const navigate = useNavigate();
 
-  console.log(topMovies, "topMovies");
+  console.log(movies, "movies");
 
   const api = new APIClass();
   const token = `Bearer ${localStorage.getItem("token")}`;
@@ -45,11 +45,9 @@ const TopMovies = ({ topMovies }) => {
   useEffect(() => {
     getMovies();
   }, [getMovies]);
-  console.log(movies);
 
   const ratings = movies.map((movie) => movie.totalRating / movie.score.length);
 
-  console.log(ratings);
   return (
     <div>
       <Container>
@@ -88,7 +86,7 @@ const TopMovies = ({ topMovies }) => {
             return (
               <SwiperSlide key={index}>
                 {() => {
-                  if (movie?.score.length === 0 || movie?.score[0].rating >= 4)
+                  if (movie?.score.length !== 0 || movie?.score[0].rating >= 4)
                     return (
                       <Box sx={{ p: 2, borderRadius: 20 }}>
                         <Card

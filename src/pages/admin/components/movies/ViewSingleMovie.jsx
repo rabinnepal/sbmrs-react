@@ -138,6 +138,12 @@ const ViewSingleMovie = () => {
                     variant="body1"
                     sx={{ fontWeight: 600, fontSize: 18, mb: 2, width: "100%" }}
                   >
+                    Category: {movie?.movie_id.category}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={{ fontWeight: 600, fontSize: 18, mb: 2, width: "100%" }}
+                  >
                     Description: {movie?.movie_id.description}
                   </Typography>
                   <Typography

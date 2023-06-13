@@ -11,13 +11,14 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-import { Link } from "react-router-dom";
 import { APIClass } from "../../APICaller/APICaller";
+import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+
 const theme = createTheme();
 
-export default function Register() {
+export default function ForgotPassword() {
   const api = new APIClass();
   const [password1, setPassword1] = React.useState("");
   const [password2, setPassword2] = React.useState("");
@@ -25,14 +26,19 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    let config = {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        token: `${localStorage.getItem("token")}`,
+      },
+    };
     const data = new FormData(e.currentTarget);
 
     let formData = {
-      userName: data.get("userName"),
-      fullName: data.get("fullName"),
       email: data.get("email"),
       password: data.get("password"),
+      confirmPassword: data.get("confirmPassword"),
     };
     if (password1 !== password2) {
       alert("Passwords don't match!");
@@ -46,19 +52,18 @@ export default function Register() {
     if (
       formData.email !== "" ||
       formData.password !== "" ||
-      formData.fullName !== "" ||
-      formData.userName !== ""
+      formData.confirmPassword !== ""
     ) {
       try {
         let res = await axios.post(
-          `${api.baseURL}user/register`,
+          `${api.baseURL}user/forgot-password`,
           formData,
-          api.configData
+          config
         );
-        if (res.data.success === true) {
-          console.log(res);
-          alert(res.data.message);
 
+        console.log(res);
+        if (res.data.status === "success") {
+          alert(res.data.message);
           window.location.href = "/login";
         } else {
           alert(res.data.message);
@@ -70,7 +75,6 @@ export default function Register() {
       alert("Please enter all required fields");
     }
   };
-
   const handlePasswordChange = (e) => {
     const password = e.target.value;
     setPassword1(password);
@@ -98,147 +102,87 @@ export default function Register() {
       >
         Sentiment Based Movie Rating System
       </Typography>
-
+      {/* <Container component="main" maxWidth="sm"> */}
+      {/* <CssBaseline /> */}
       <Box
         sx={{
+          marginTop: 4,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           p: 2,
         }}
       >
-        <Grid
-          container
-          sx={{ width: 600, p: 3, alignItems: "center" }}
-          component="form"
-          onSubmit={handleSubmit}
-          noValidate
-        >
-          <Grid item xs={4}>
-            <Typography>Username:</Typography>
-          </Grid>
-          <Grid item xs={8}>
+        <Box sx={{ width: 400, p: 3 }}>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
+            <Typography>Email:</Typography>
             <TextField
               sx={{ border: "1px solid white" }}
               inputProps={{ style: { color: "white" } }}
               margin="normal"
               required
+              fullWidth
               size="small"
-              label={
-                <Typography sx={{ color: "white" }}>
-                  Enter your Username
-                </Typography>
-              }
-              name="userName"
-              autoFocus
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <Typography>Full Name :</Typography>
-          </Grid>
-          <Grid item xs={8}>
-            <TextField
-              sx={{ border: "1px solid white" }}
-              inputProps={{ style: { color: "white" } }}
-              margin="normal"
-              required
-              size="small"
-              label={
-                <Typography sx={{ color: "white" }}>
-                  Enter your full name
-                </Typography>
-              }
-              name="fullName"
-            />
-          </Grid>
-
-          <Grid item xs={4}>
-            <Typography>Email Address:</Typography>
-          </Grid>
-          <Grid item xs={8}>
-            <TextField
-              sx={{ border: "1px solid white" }}
-              inputProps={{ style: { color: "white" } }}
-              margin="normal"
-              required
-              size="small"
-              id="email"
-              label={
-                <Typography sx={{ color: "white" }}>
-                  Enter your Email Address
-                </Typography>
-              }
+              label={<Typography sx={{ color: "white" }}>Email</Typography>}
               name="email"
-              autoComplete="email"
               autoFocus
             />
-          </Grid>
-          <Grid item xs={4}>
             <Typography>Password:</Typography>
-          </Grid>
-          <Grid item xs={8}>
             <TextField
               sx={{ border: "1px solid white" }}
               inputProps={{ style: { color: "white" } }}
               margin="normal"
               required
-              type="password"
+              fullWidth
               size="small"
-              label={
-                <Typography sx={{ color: "white" }}>
-                  Enter your password
-                </Typography>
-              }
               name="password"
+              label={<Typography sx={{ color: "white" }}>Password</Typography>}
+              type="password"
+              id="password"
               onChange={(e) => {
                 setPassword1(e.target.value);
                 handlePasswordChange(e);
               }}
             />
-          </Grid>
-          <Grid item xs={4}>
-            <Typography>Re-enter Password:</Typography>
-          </Grid>
-          <Grid item xs={8}>
+            <Typography>Re-enter password:</Typography>
             <TextField
               sx={{ border: "1px solid white" }}
               inputProps={{ style: { color: "white" } }}
               margin="normal"
               required
-              type="password"
+              fullWidth
               size="small"
+              name="confirmPassword"
               label={
                 <Typography sx={{ color: "white" }}>
-                  Re-enter your password
+                  Confirm Password
                 </Typography>
               }
-              name="repassword"
+              type="password"
               onChange={(e) => setPassword2(e.target.value)}
             />
-          </Grid>
-
-          <Grid item xs={4}></Grid>
-          <Grid item xs={5} sx={{ mt: 2 }}>
-            <Button type="submit" fullWidth variant="contained" sx={{ mt: 1 }}>
-              Sign In
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Change Password
             </Button>
-          </Grid>
-        </Grid>
-        <Box
-          sx={{
-            mt: ".5rem",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Link to="/login" style={{ textDecoration: "none" }}>
-            Aleady signed up?{" "}
-            <span style={{ textDecoration: "underline" }}>Click here</span>
-          </Link>
+            <Link to="/login">
+              <Button fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+                Go Back
+              </Button>
+            </Link>
+          </Box>
         </Box>
       </Box>
+      {/* </Container> */}
     </Box>
   );
 }
