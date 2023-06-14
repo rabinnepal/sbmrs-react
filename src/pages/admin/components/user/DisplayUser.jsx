@@ -8,11 +8,6 @@ import axios from "axios";
 import { useCallback } from "react";
 import {
   Button,
-  Card,
-  CardContent,
-  CardMedia,
-  CardActions,
-  Grid,
   Container,
   TableContainer,
   TableHead,
@@ -21,11 +16,14 @@ import {
   TableBody,
   Paper,
   Table,
+  Stack,
 } from "@mui/material";
 import { APIClass } from "../../../../APICaller/APICaller";
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 export default function DisplayUser() {
+  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [deleted, setDeleted] = useState(false);
 
@@ -97,7 +95,7 @@ export default function DisplayUser() {
                 <TableCell align="right">Fullname</TableCell>
                 <TableCell align="right">Email</TableCell>
                 <TableCell align="right">Role</TableCell>
-                <TableCell align="right">Action</TableCell>
+                <TableCell align="center">Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -121,14 +119,23 @@ export default function DisplayUser() {
                   <TableCell align="right">{user.email}</TableCell>
                   <TableCell align="right">{user.role}</TableCell>
                   <TableCell align="right">
-                    <Button
-                      color="error"
-                      onClick={() => {
-                        handleDelete(user._id);
-                      }}
-                    >
-                      Delete
-                    </Button>
+                    <Stack direction="row" spacing={2}>
+                      <Button
+                        onClick={() =>
+                          navigate(`/admin/user-comments/${user._id}`)
+                        }
+                      >
+                        view user comments
+                      </Button>
+                      <Button
+                        color="error"
+                        onClick={() => {
+                          handleDelete(user._id);
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </Stack>
                   </TableCell>
                 </TableRow>
               ))}

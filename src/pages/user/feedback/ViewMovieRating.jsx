@@ -19,7 +19,6 @@ const ViewMovieRating = () => {
   const navigate = useNavigate();
 
   const { id } = useParams();
-  console.log(id);
 
   const token = localStorage.getItem("token");
 
@@ -44,7 +43,6 @@ const ViewMovieRating = () => {
       getMovie();
     }
   }, [getMovie]);
-  console.log(movies, "hehgjkl");
 
   return (
     <>
@@ -193,6 +191,12 @@ const ViewMovieRating = () => {
               sx={{ color: "white", fontWeight: "bold", fontSize: 26 }}
             >
               {movies?.movie_title}
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{ fontWeight: 600, fontSize: 18, my: 2 }}
+            >
+              Category : {movies?.category}
             </Typography>
             <Typography
               variant="body1"

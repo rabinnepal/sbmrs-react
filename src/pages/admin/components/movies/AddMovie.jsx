@@ -2,7 +2,13 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Autocomplete, Button, OutlinedInput, TextField } from "@mui/material";
+import {
+  Autocomplete,
+  Button,
+  CircularProgress,
+  OutlinedInput,
+  TextField,
+} from "@mui/material";
 
 import { useState } from "react";
 import axios from "axios";
@@ -13,6 +19,9 @@ const drawerWidth = 240;
 export default function AddMovie() {
   const api = new APIClass();
   const token = `Bearer ${localStorage.getItem("token")}`;
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -44,6 +53,9 @@ export default function AddMovie() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setIsLoading(true);
+    setIsButtonDisabled(true);
 
     const formattedCategories = selectedCategories.join(", ");
     const data = new FormData(e.currentTarget);
@@ -78,6 +90,8 @@ export default function AddMovie() {
       .catch((err) => {
         console.log(err);
       });
+    setIsLoading(false);
+    setIsButtonDisabled(false);
   };
 
   React.useEffect(() => {
@@ -162,8 +176,9 @@ export default function AddMovie() {
           variant="contained"
           color="success"
           sx={{ display: "block", px: 3, ml: 2, mb: 5 }}
+          disabled={isButtonDisabled}
         >
-          Add
+          {isLoading ? <CircularProgress size={24} /> : "Add"}
         </Button>
       </Box>
     </Box>

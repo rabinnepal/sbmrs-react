@@ -26,6 +26,7 @@ import ViewSingleMovie from "./pages/admin/components/movies/ViewSingleMovie";
 import UpdateMovie from "./pages/admin/components/movies/UpdateMovie";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import UpdateProfileForm from "./pages/user/profile/UpdateProfile";
+import UserComment from "./pages/admin/components/user/UserComment";
 
 function PrivateRoute({ children }) {
   const auth = AuthController();
@@ -77,6 +78,7 @@ function App() {
           <Route path="/admin/movies/:id" element={<ViewSingleMovie />} />
           {/* <Route path="/admin/edit-movie/:id" element={<UpdateMovie />} /> */}
           <Route path="/admin/display-users/" element={<DisplayUser />} />
+          <Route path="/admin/user-comments/:id/" element={<UserComment />} />
           <Route path="/admin/add-movie/" element={<AddMovie />} />
           <Route path="/admin/display-categories/" element={<Category />} />
           <Route path="/admin/category/" element={<AddCategory />} />

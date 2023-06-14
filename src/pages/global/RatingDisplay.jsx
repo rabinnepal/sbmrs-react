@@ -12,11 +12,13 @@ const starIconStyle = {
 };
 
 const RatingDisplay = ({ rating }) => {
+  const roundedRating = rating.toFixed(2); // Round the rating to 2 decimal places
   return (
     <div style={ratingContainerStyle}>
       <Star style={starIconStyle} />
-      <span>{rating}</span>
+      <span>{roundedRating}</span>
     </div>
   );
 };
+
 export default RatingDisplay;

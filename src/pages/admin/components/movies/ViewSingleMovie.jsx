@@ -89,6 +89,7 @@ const ViewSingleMovie = () => {
         {Array.isArray(movies) === true ? (
           <Box>
             {movies?.map((movie, index) => {
+              console.log(movie, "hjk");
               return (
                 <Box
                   key={index}
@@ -116,7 +117,7 @@ const ViewSingleMovie = () => {
                       color="error"
                       variant="contained"
                       onClick={() => {
-                        handleDelete(movie._id);
+                        handleDelete(movie.movie_id._id);
                       }}
                     >
                       Delete
