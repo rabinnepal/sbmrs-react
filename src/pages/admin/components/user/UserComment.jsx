@@ -139,9 +139,9 @@ const UserComment = () => {
                       )}
                     </Typography>
                   </Box>
-                  <Box sx={{ px: 2 }}>
+                  <Box sx={{ px: 2, textAlign: "left" }}>
                     <Typography sx={{ fontSize: 17 }}>
-                      {comment.review}
+                      {comment.review_text}
                     </Typography>
                   </Box>
                 </Box>

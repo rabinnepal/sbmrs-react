@@ -111,7 +111,7 @@ const ViewMovieRating = () => {
                     <Typography
                       sx={{ fontSize: 20, fontWeight: 700, color: "white" }}
                     >
-                      User's Feedback
+                      User's Feedback <span>({movie?.score.length})</span>
                     </Typography>
                     {movie.score?.map((score) => {
                       return (

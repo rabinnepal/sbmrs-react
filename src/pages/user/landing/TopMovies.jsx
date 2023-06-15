@@ -110,7 +110,10 @@ const TopMovies = () => {
                               {movie?.movie_id?.movie_title}
                             </Typography>
                             <Box>
-                              <RatingDisplay rating={ratings[index]} />
+                              <RatingDisplay
+                                rating={ratings[index]}
+                                movie={movie}
+                              />
                             </Box>
                           </CardContent>
                         </Card>

@@ -62,7 +62,7 @@ export default function ForgotPassword() {
         );
 
         console.log(res);
-        if (res.data.status === "success") {
+        if (res.data.success === true) {
           alert(res.data.message);
           window.location.href = "/login";
         } else {

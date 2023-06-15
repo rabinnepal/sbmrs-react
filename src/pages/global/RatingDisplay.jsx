@@ -11,12 +11,13 @@ const starIconStyle = {
   color: "#FAAF2D",
 };
 
-const RatingDisplay = ({ rating }) => {
+const RatingDisplay = ({ rating, movie }) => {
   const roundedRating = rating.toFixed(2); // Round the rating to 2 decimal places
   return (
     <div style={ratingContainerStyle}>
       <Star style={starIconStyle} />
       <span>{roundedRating}</span>
+      <span>({movie?.score.length})</span>
     </div>
   );
 };

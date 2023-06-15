@@ -70,6 +70,7 @@ const UserFeedback = () => {
           console.log(res);
           setMessage(res.data.commentAndReview);
           alert("Comment Added Successfully!!");
+          e.target.reset();
         } else {
           alert(res.data.message);
         }
@@ -247,79 +248,3 @@ const UserFeedback = () => {
 };
 
 export default UserFeedback;
-
-// <Box
-// className="background-image"
-// sx={{
-//   display: "flex",
-//   flexDirection: "column",
-//   justifyContent: "center",
-//   alignItems: "center",
-//   py: 3,
-//   color: "white",
-// }}
-// >
-// <Container
-//   sx={{
-//     display: "flex",
-//     flexDirection: "column",
-//     justifyContent: "center",
-//     alignItems: "center",
-//   }}
-// >
-//   <Typography
-//     variant="h6"
-//     sx={{ color: "white", fontWeight: "bold", fontSize: 26 }}
-//   >
-//     {movie?.movie_title}
-//   </Typography>
-//   <Typography
-//     variant="body1"
-//     sx={{ fontWeight: 600, fontSize: 18, mb: 2 }}
-//   >
-//     {movie?.description}
-//   </Typography>
-//   <img src={movie?.image} alt={movie?.movie_title} width={400} />
-//   <Box
-//     component="form"
-//     onSubmit={addComment}
-//     sx={{
-//       my: 4,
-//       display: "flex",
-//       flexDirection: "column",
-//       alignItems: "center",
-//       gap: 3,
-//     }}
-//   >
-//     <Rating
-//       name="rating"
-//       size="large"
-//       value={value}
-//       defaultValue={2.5}
-//       precision={0.5}
-//       sx={{ border: "ridge" }}
-//       onChange={(event, newValue) => {
-//         setValue(newValue);
-//       }}
-//     />
-//     <TextField
-//       sx={{ border: "1px solid white", width: 500 }}
-//       inputProps={{ style: { color: "white" } }}
-//       name="message"
-//       multiline
-//       rows={4}
-//       type="text"
-//       fullWidth
-//       placeholder="Write your comment here"
-//     />
-//     <Button
-//       variant="contained"
-//       type="submit"
-//       onSubmit={() => navigate(`/feedback-submission`)}
-//       disabled={isButtonDisabled}
-//     >
-//       {isLoading ? <CircularProgress size={24} /> : "Submit"}
-//     </Button>
-//   </Box>
-// </Container>
-// </Box>
