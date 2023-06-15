@@ -40,12 +40,19 @@ const UserFeedback = () => {
         console.log(err);
       });
   }, []);
+
   useEffect(() => {
     getMovie();
   }, []);
 
   const addComment = async (e) => {
     e.preventDefault();
+
+    if (!value) {
+      alert("Please provide a rating");
+      return;
+    }
+
     setIsLoading(true);
     setIsButtonDisabled(true);
     const configData = {
@@ -109,7 +116,7 @@ const UserFeedback = () => {
                     variant="body1"
                     sx={{ fontWeight: 600, fontSize: 18, my: 2 }}
                   >
-                    Category : {movie.movie_id?.category}
+                    Category: {movie.movie_id?.category}
                   </Typography>
                   <Typography
                     variant="body1"
@@ -137,12 +144,12 @@ const UserFeedback = () => {
                       name="rating"
                       size="large"
                       value={value}
-                      defaultValue={2.5}
                       precision={0.5}
                       sx={{ border: "ridge" }}
                       onChange={(event, newValue) => {
                         setValue(newValue);
                       }}
+                      required // Add required attribute to make it a required field
                     />
                     <TextField
                       sx={{ border: "1px solid white", width: 500 }}
@@ -153,6 +160,7 @@ const UserFeedback = () => {
                       type="text"
                       fullWidth
                       placeholder="Write your comment here"
+                      required
                     />
                     <Button
                       variant="contained"
@@ -190,7 +198,7 @@ const UserFeedback = () => {
               variant="body1"
               sx={{ fontWeight: 600, fontSize: 18, my: 2 }}
             >
-              Category : {movies?.category}
+              Category: {movies?.category}
             </Typography>
             <Typography
               variant="body1"
@@ -214,12 +222,12 @@ const UserFeedback = () => {
                 name="rating"
                 size="large"
                 value={value}
-                defaultValue={2.5}
                 precision={0.5}
                 sx={{ border: "ridge" }}
                 onChange={(event, newValue) => {
                   setValue(newValue);
                 }}
+                required // Add required attribute to make it a required field
               />
               <TextField
                 sx={{ border: "1px solid white", width: 500 }}
