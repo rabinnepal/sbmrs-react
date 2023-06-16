@@ -52,6 +52,7 @@ const UpdateProfileForm = () => {
           display: "flex",
           flexDirection: "column",
           p: 2,
+          width: "70%",
         }}
       >
         <TextField
