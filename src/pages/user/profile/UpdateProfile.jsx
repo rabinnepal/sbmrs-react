@@ -63,7 +63,6 @@ const UpdateProfileForm = () => {
             },
           }}
           margin="normal"
-          fullWidth
           label={<Typography sx={{ color: "white" }}>Username</Typography>}
           name="userName"
           autoFocus
@@ -77,7 +76,6 @@ const UpdateProfileForm = () => {
             },
           }}
           margin="normal"
-          fullWidth
           label={<Typography sx={{ color: "white" }}>Email</Typography>}
           name="email"
           //   value={formData.email}
@@ -90,7 +88,6 @@ const UpdateProfileForm = () => {
             },
           }}
           margin="normal"
-          fullWidth
           label={<Typography sx={{ color: "white" }}>Phone Number</Typography>}
           name="phoneNumber"
           //   value={formData.phoneNumber}
@@ -103,17 +100,11 @@ const UpdateProfileForm = () => {
             },
           }}
           margin="normal"
-          fullWidth
           label={<Typography sx={{ color: "white" }}>Full Name</Typography>}
           name="fullName"
           //   value={formData.fullName}
         />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-        >
+        <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
           Update
         </Button>
       </Box>
