@@ -33,7 +33,7 @@ const NewMovies = () => {
       },
     };
     const res = await axios.get(`${api.baseURL}user/view-movies/`, configToken);
-    setMovies(res.data.movies);
+    setMovies(res.data.movies.reverse());
   }, []);
 
   useEffect(() => {
@@ -74,31 +74,28 @@ const NewMovies = () => {
             },
           }}
         >
-          {movies
-            .slice(0, 10)
-            .reverse()
-            ?.map((movie, index) => {
-              return (
-                <SwiperSlide key={index}>
-                  <Box sx={{ p: 2, borderRadius: 20, width: 240 }}>
-                    <Card onClick={(e) => navigate(`/rating/${movie._id}`)}>
-                      <CardMedia
-                        image={movie.image}
-                        alt={movie.movie_title}
-                        style={{ height: 200 }}
-                        onClick={(e) => navigate(`/rating/${movie._id}`)}
-                      />
+          {movies.slice(0, 10)?.map((movie, index) => {
+            return (
+              <SwiperSlide key={index}>
+                <Box sx={{ p: 2, borderRadius: 20, width: 240 }}>
+                  <Card onClick={(e) => navigate(`/rating/${movie._id}`)}>
+                    <CardMedia
+                      image={movie.image}
+                      alt={movie.movie_title}
+                      style={{ height: 200 }}
+                      onClick={(e) => navigate(`/rating/${movie._id}`)}
+                    />
 
-                      <CardContent>
-                        <Typography sx={{ fontSize: 18, color: "blue" }}>
-                          {movie.movie_title}
-                        </Typography>
-                      </CardContent>
-                    </Card>
-                  </Box>
-                </SwiperSlide>
-              );
-            })}
+                    <CardContent>
+                      <Typography sx={{ fontSize: 18, color: "blue" }}>
+                        {movie.movie_title}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Box>
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
       </Container>
     </div>

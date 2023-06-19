@@ -91,7 +91,6 @@ const UserFeedback = () => {
     setIsLoading(false);
     setIsButtonDisabled(false);
   };
-  console.log(id);
   return (
     <>
       {Array.isArray(movies) === true ? (

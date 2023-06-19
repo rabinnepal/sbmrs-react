@@ -67,8 +67,12 @@ const ViewMovieRating = () => {
       </Box>
     );
   }
-  const ratings = movies.map((movie) => movie.totalRating / movie.score.length);
+  const ratings =
+    Array.isArray(movies) === true
+      ? movies.map((movie) => movie.totalRating / movie.score.length)
+      : null;
 
+  console.log(Array.isArray(movies));
   return (
     <>
       {Array.isArray(movies) === true ? (
@@ -97,6 +101,13 @@ const ViewMovieRating = () => {
                     sx={{ fontWeight: 600, fontSize: 18, my: 2 }}
                   >
                     Category : {movie.movie_id?.category}
+                  </Typography>
+
+                  <Typography
+                    variant="body1"
+                    sx={{ fontWeight: 600, fontSize: 18, my: 2 }}
+                  >
+                    Release Date : {movie.movie_id?.release_date}
                   </Typography>
                   <Typography
                     variant="body1"
@@ -224,6 +235,12 @@ const ViewMovieRating = () => {
               sx={{ fontWeight: 600, fontSize: 18, my: 2 }}
             >
               Category : {movies?.category}
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{ fontWeight: 600, fontSize: 18, my: 2 }}
+            >
+              Release Date : {movies?.release_date}
             </Typography>
             <Typography
               variant="body1"
