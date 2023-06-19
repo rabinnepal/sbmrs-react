@@ -8,9 +8,11 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { APIClass } from "../../../APICaller/APICaller";
+import { useNavigate } from "react-router-dom";
 
 const UpdateProfileForm = () => {
   const api = new APIClass();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false); // State for loading indicator
 
   const handleSubmit = async (e) => {
@@ -39,6 +41,7 @@ const UpdateProfileForm = () => {
       );
       console.log(response.data);
       alert(response.data.message);
+      navigate("/profile");
       // Handle success or display a message to the user
     } catch (error) {
       console.log(error);
