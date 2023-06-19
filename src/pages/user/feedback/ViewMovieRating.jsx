@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Card,
+  CircularProgress,
   Container,
   Rating,
   Typography,
@@ -16,6 +17,7 @@ const ViewMovieRating = () => {
   const api = new APIClass();
   const [value, setValue] = useState();
   const [movies, setMovies] = useState();
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -28,21 +30,44 @@ const ViewMovieRating = () => {
         Authorization: `Bearer ${token}`,
       },
     };
-    await axios
-      .get(`${api.baseURL}user/view-movie/${id}`, configData)
-      .then((res) => {
-        setMovies(res.data.movie);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+    try {
+      const response = await axios.get(
+        `${api.baseURL}user/view-movie/${id}`,
+        configData
+      );
+      setMovies(response.data.movie);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false); // Set loading to false when the request is complete
+    }
   }, []);
+
   useEffect(() => {
     if (id) {
       getMovie();
     }
   }, [getMovie]);
+
+  if (loading) {
+    // Render loading screen while data is being fetched
+    return (
+      <Box
+        className="background-image"
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
+  const ratings = movies.map((movie) => movie.totalRating / movie.score.length);
 
   return (
     <>
@@ -90,7 +115,8 @@ const ViewMovieRating = () => {
                     </Typography>
                     <Rating
                       name="rating"
-                      value={movie.totalRating}
+                      value={ratings}
+                      precision={0.5}
                       readOnly
                       sx={{ border: "ridge" }}
                     />
@@ -141,6 +167,7 @@ const ViewMovieRating = () => {
                             </Typography>
                             <Rating
                               value={score.rating}
+                              precision={0.5}
                               readOnly
                               sx={{ border: "ridge" }}
                             />
@@ -211,7 +238,8 @@ const ViewMovieRating = () => {
               </Typography>
               <Rating
                 name="rating"
-                // value={movies.totalRating}
+                value={ratings}
+                precision={0.5}
                 readOnly
                 sx={{ border: "ridge" }}
               />

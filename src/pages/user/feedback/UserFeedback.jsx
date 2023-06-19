@@ -10,7 +10,7 @@ import {
 import React, { useCallback, useEffect, useState } from "react";
 import { APIClass } from "../../../APICaller/APICaller";
 import axios from "axios";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const UserFeedback = () => {
   const api = new APIClass();
@@ -20,6 +20,8 @@ const UserFeedback = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const { id } = useParams();
+
+  const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
 
@@ -78,6 +80,7 @@ const UserFeedback = () => {
           setMessage(res.data.commentAndReview);
           alert("Comment Added Successfully!!");
           e.target.reset();
+          navigate(`/rating/${id}`);
         } else {
           alert(res.data.message);
         }
@@ -88,7 +91,7 @@ const UserFeedback = () => {
     setIsLoading(false);
     setIsButtonDisabled(false);
   };
-
+  console.log(id);
   return (
     <>
       {Array.isArray(movies) === true ? (

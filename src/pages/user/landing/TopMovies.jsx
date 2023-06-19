@@ -46,15 +46,15 @@ const TopMovies = () => {
     getMovies();
   }, [getMovies]);
 
-  // const ratings = movies.map((movie) => movie.totalRating / movie.score.length);
-  const ratings = movies.map((movie) => {
-    const totalRating = movie.score.reduce(
-      (sum, score) => sum + parseInt(score.rating),
-      0
-    );
-    const averageRating = totalRating / movie.score.length;
-    return averageRating;
-  });
+  const ratings = movies.map((movie) => movie.totalRating / movie.score.length);
+  // const ratings = movies.map((movie) => {
+  //   const totalRating = movie.score.reduce(
+  //     (sum, score) => sum + parseInt(score.rating),
+  //     0
+  //   );
+  //   const averageRating = totalRating / movie.score.length;
+  //   return averageRating;
+  // });
 
   return (
     <div>

@@ -1,13 +1,22 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { TextField, Button, Box, Typography } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Box,
+  Typography,
+  CircularProgress,
+} from "@mui/material";
 import { APIClass } from "../../../APICaller/APICaller";
 
 const UpdateProfileForm = () => {
   const api = new APIClass();
+  const [isLoading, setIsLoading] = useState(false); // State for loading indicator
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // Start loading
+
     const data = new FormData(e.currentTarget);
     const formData = {
       userName: data.get("userName"),
@@ -29,10 +38,13 @@ const UpdateProfileForm = () => {
         config
       );
       console.log(response.data);
+      alert(response.data.message);
       // Handle success or display a message to the user
     } catch (error) {
       console.log(error);
       // Handle error or display an error message to the user
+    } finally {
+      setIsLoading(false); // Stop loading
     }
   };
 
@@ -42,6 +54,9 @@ const UpdateProfileForm = () => {
       color="white"
       sx={{
         minHeight: "75vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       <Box
@@ -104,8 +119,14 @@ const UpdateProfileForm = () => {
           name="fullName"
           //   value={formData.fullName}
         />
-        <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
-          Update
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+          disabled={isLoading} // Disable the button when loading
+        >
+          {isLoading ? <CircularProgress /> : "Update"}
+          {/* Display loading text if loading */}
         </Button>
       </Box>
     </Box>
